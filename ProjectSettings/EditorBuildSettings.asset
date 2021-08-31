@@ -6,39 +6,45 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/MainScene.unity
+    path: Assets/Scenes/ProcedureScene.unity
+    guid: e1ce42c1f0ebf0249a5ed2e8208312c8
+  - enabled: 1
+    path: Assets/Scenes/Emission&Noise/MainScene.unity
     guid: 895c36c7acd37454b82aa332dd4326bd
   - enabled: 1
-    path: Assets/Scenes/GeneralDataScene.unity
+    path: Assets/Scenes/Emission&Noise/GeneralDataScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/MeasurementPointsDataScene.unity
+    path: Assets/Scenes/Emission&Noise/MeasurementPointsDataScene.unity
     guid: b69e827563b3b494bb5b1e7cb9f7077f
   - enabled: 1
-    path: Assets/Scenes/WeatherConditionsDataScene.unity
+    path: Assets/Scenes/Emission&Noise/WeatherConditionsDataScene.unity
     guid: 1840c7782297a5544953314de5977e5d
   - enabled: 1
-    path: Assets/Scenes/TechnicalDataScene.unity
+    path: Assets/Scenes/Emission&Noise/TechnicalDataScene.unity
     guid: b24eb43320f549d439ac7b1f8e4cd56d
   - enabled: 1
-    path: Assets/Scenes/EmissionResultsScene.unity
+    path: Assets/Scenes/Emission&Noise/EmissionResultsScene.unity
     guid: 5dddd07d18fa2364f8ff20c0c8887745
   - enabled: 1
-    path: Assets/Scenes/NoiseResultsScene.unity
+    path: Assets/Scenes/Emission&Noise/NoiseResultsScene.unity
     guid: 8cb8905396138aa40b6afb0a32793050
   - enabled: 1
-    path: Assets/Scenes/DescriptionDataScene.unity
+    path: Assets/Scenes/Emission&Noise/DescriptionDataScene.unity
     guid: 90078afa12faa63458fdc5c5dcc1a0e4
   - enabled: 1
-    path: Assets/Scenes/EventsDataScene.unity
+    path: Assets/Scenes/Emission&Noise/EventsDataScene.unity
     guid: b2434e9b05037064983378a30da4fb95
   - enabled: 1
-    path: Assets/Scenes/SourceDataScene.unity
+    path: Assets/Scenes/Emission&Noise/SourceDataScene.unity
     guid: cb8fb44406e344a4db99a293fe2e341d
   - enabled: 1
-    path: Assets/Scenes/FilesScene.unity
+    path: Assets/Scenes/Emission&Noise/FilesScene.unity
     guid: 9f0e2f19570328744a236228ff24db3f
   - enabled: 1
-    path: Assets/Scenes/FinalScene.unity
+    path: Assets/Scenes/Inmission/InmMainScene.unity
+    guid: b93dcc49c3e0d14438aec950dddfa863
+  - enabled: 1
+    path: Assets/Scenes/Emission&Noise/FinalScene.unity
     guid: dbddc923114dd5142b4350f316b3a887
   m_configObjects: {}
