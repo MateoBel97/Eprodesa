@@ -6,6 +6,13 @@ using System.IO;
 
 public static class GlobalData
 {
+    /*
+     * FOR EACH NEW VARIABLE CREATED!
+     * 1. Add variable to the correspondig scene below
+     * 2. Add 'case :' to the UpdateParameter() and GetParameter() functions according to the type (int, float, etc...)
+     * 3. Add the variable name on the InputField dedicated to updating its value
+     */
+
     // GeneralData
     public static bool generalDataSaved;
     public static string companyName;
@@ -20,11 +27,13 @@ public static class GlobalData
     public static List<string> n = new List<string> { };
     public static List<string> w = new List<string> { };
 
+
+
     // WeatherData
 
     public static bool weatherDataSaved;
-    public static bool dayTimeFrame;
-    public static bool nightTimeFrame;
+    public static bool dayMetConditions;
+    public static bool nightMetConditions;
     public static double initialWindSpeed_D, finalWindSpeed_D;
     public static double initialTemperature_D, finalTemperature_D;
     public static double initialHumidity_D, finalHumidity_D;
@@ -106,11 +115,11 @@ public static class GlobalData
         pointName.Clear();
         n.Clear();
         w.Clear();
-    
+
 
         weatherDataSaved = false;
-        dayTimeFrame = false;
-        nightTimeFrame = false;
+        dayMetConditions = false;
+        nightMetConditions = false;
         initialWindSpeed_D = 0.0f;
         finalWindSpeed_D = 0.0f;
         initialTemperature_D = 0.0f;
@@ -164,7 +173,7 @@ public static class GlobalData
 
         descriptionDataSaved = false;
         description = null;
-        
+
         eventsDataSaved = false;
         eventName.Clear();
         eventLevel.Clear();
@@ -193,7 +202,6 @@ public static class GlobalData
 
         text = null;
     }
-
     public static string CreateTxt()
     {
         /*
@@ -227,14 +235,14 @@ public static class GlobalData
         for (int i = 0; i < pointName.Count; i++)
         {
             myText += pointName[i] + columnSplit + n[i] + columnSplit + w[i];
-            if( i < pointName.Count - 1)
+            if (i < pointName.Count - 1)
             {
                 myText += rowSplit;
             }
         }
         myText += pageSplit;
 
-        if(dayTimeFrame)
+        if (dayMetConditions)
         {
             myText += initialWindSpeed_D + columnSplit + finalWindSpeed_D;
             myText += rowSplit;
@@ -251,7 +259,7 @@ public static class GlobalData
 
         myText += pageSplit;
 
-        if (nightTimeFrame)
+        if (nightMetConditions)
         {
             myText += initialWindSpeed_N + columnSplit + finalWindSpeed_N;
             myText += rowSplit;
@@ -280,7 +288,7 @@ public static class GlobalData
         myText += pageSplit;
 
 
-        if(isNoiseEmissionMeasurement)
+        if (isNoiseEmissionMeasurement)
         {
             for (int i = 0; i < emissionDescription.Count; i++)
             {
@@ -383,6 +391,169 @@ public static class GlobalData
 
         return myText;
     }
+
+    public static void UpdateParameter(string variable, bool newValue)
+    {
+        switch(variable)
+        {
+            case "usingMetConditions":
+                dayMetConditions = newValue;
+                break;
+            case "nightMetConditions":
+                nightMetConditions = newValue;
+                break;
+            default:
+                Debug.Log("NO VARIABLE UPDATED");
+                break;
+        }
+    }
+    public static void UpdateParameter(string variable, int newValue)
+    {
+        switch (variable)
+        {
+            case "day":
+                day = newValue;
+                break;
+            case "month":
+                month = newValue;
+                break;
+            case "year":
+                year = newValue;
+                break;
+            default:
+                Debug.Log("NO VARIABLE UPDATED");
+                break;
+        }
+    }
+    public static void UpdateParameter(string variable, float newValue)
+    {
+        switch(variable)
+        {
+            case "initialWindSpeed_D":
+                initialWindSpeed_D = newValue;
+                break;
+            case "finalWindSpeed_D":
+                finalWindSpeed_D = newValue;
+                break;
+            case "initialTemperature_D":
+                initialTemperature_D = newValue;
+                break;
+            case "finalTemperature_D":
+                finalTemperature_D = newValue;
+                break;
+            case "initialHumidity_D":
+                initialHumidity_D = newValue;
+                break;
+            case "finalHumidity_D":
+                finalHumidity_D = newValue;
+                break;
+            case "initialAtmPressure_D":
+                initialAtmPressure_D = newValue;
+                break;
+            case "finalAtmPressure_D":
+                finalAtmPressure_D = newValue;
+                break;
+            case "initialWindSpeed_N":
+                initialWindSpeed_N = newValue;
+                break;
+            case "finalWindSpeed_N":
+                finalWindSpeed_N = newValue;
+                break;
+            case "initialTemperature_N":
+                initialTemperature_N = newValue;
+                break;
+            case "finalTemperature_N":
+                finalTemperature_N = newValue;
+                break;
+            case "initialHumidity_N":
+                initialHumidity_N = newValue;
+                break;
+            case "finalHumidity_N":
+                finalHumidity_N = newValue;
+                break;
+            case "initialAtmPressure_N":
+                initialAtmPressure_N = newValue;
+                break;
+            case "finalAtmPressure_N":
+                finalAtmPressure_N = newValue;
+                break;
+            default:
+                Debug.Log("NO VARIABLE UPDATED");
+                break;
+
+        }
+    }
+    public static void UpdateParameter(string variable, string newValue)
+    {
+        switch (variable)
+        {
+            case "companyName":
+                companyName = newValue;
+                break;
+            case "soundMeterSerialNumber":
+                soundMeterSerialNumber = newValue;
+                break;
+            case "calibratorSerialNumber":
+                calibratorSerialNumber = newValue;
+                break;
+            case "metStationSerialNumber":
+                metStationSerialNumber = newValue;
+                break;
+            default:
+                Debug.Log("NO VARIABLE UPDATED");
+                break;
+        }
+
+    }
+
+    public static bool GetParameter(string variable, bool type)
+    {
+        bool value = false;
+        switch (variable)
+        {
+
+        }
+        return value;
+    }
+    public static int GetParameter(string variable, int type)
+    {
+        int value = 0;
+        switch (variable)
+        {
+            case "day":
+                value = day;
+                break;
+            case "month":
+                value = month;
+                break;
+            case "year":
+                value = year;
+                break;
+            default:
+                value = 0;
+                break;
+        }
+        return value;
+    }
+    public static float GetParameter(string variable, float type)
+    {
+        float value = 0.0f;
+        switch(variable)
+        {
+
+        }
+        return value;
+    }
+    public static string GetParameter(string variable, string type)
+    {
+        string value = "";
+        switch (variable)
+        {
+
+        }
+        return value;
+    }
+
 }
 
 

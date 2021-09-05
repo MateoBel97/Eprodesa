@@ -261,7 +261,7 @@ public class FilesReader : MonoBehaviour
         GlobalData.weatherDataSaved = true;
         if (!dayWeatherInfo.Equals("NO"))
         {
-            GlobalData.dayTimeFrame = true;
+            GlobalData.dayMetConditions = true;
             string windSpeed = dayWeatherInfo.Split(rowSplit, System.StringSplitOptions.None)[0];
             GlobalData.initialWindSpeed_D = double.Parse(windSpeed.Split(columnSplit, System.StringSplitOptions.None)[0]);
             GlobalData.finalWindSpeed_D = double.Parse(windSpeed.Split(columnSplit, System.StringSplitOptions.None)[1]);
@@ -285,7 +285,7 @@ public class FilesReader : MonoBehaviour
     {
         if (!nigthWeatherInfo.Equals("NO"))
         {
-            GlobalData.nightTimeFrame = true;
+            GlobalData.nightMetConditions = true;
             string windSpeed = nigthWeatherInfo.Split(rowSplit, System.StringSplitOptions.None)[0];
             GlobalData.initialWindSpeed_N = double.Parse(windSpeed.Split(columnSplit, System.StringSplitOptions.None)[0]);
             GlobalData.finalWindSpeed_N = double.Parse(windSpeed.Split(columnSplit, System.StringSplitOptions.None)[1]);

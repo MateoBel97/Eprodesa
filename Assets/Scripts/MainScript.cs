@@ -16,13 +16,15 @@ public class MainScript : MonoBehaviour
         }
         else
         {
-            GlobalData.ResetValues();
+            //GlobalData.ResetValues();
+            Measurement.ResetValues();
         }
 
     }
 
     void CreateDefaultValues()
     {
+        /*
         GlobalData.generalDataSaved = true;
         GlobalData.measurementPointsDataSaved = true;
         GlobalData.weatherDataSaved = true;
@@ -46,8 +48,8 @@ public class MainScript : MonoBehaviour
 
         //GlobalData.timeFrame = GlobalData.TimeFrame.night;
 
-        GlobalData.dayTimeFrame = true;
-        GlobalData.nightTimeFrame = true;
+        GlobalData.dayMetConditions = true;
+        GlobalData.nightMetConditions = true;
 
         GlobalData.initialWindSpeed_D = 5;
         GlobalData.finalWindSpeed_D = 6;
@@ -109,6 +111,71 @@ public class MainScript : MonoBehaviour
         GlobalData.eventLength = new List<float> { 10.0f, 20.0f, 30.0f};
         
         GlobalData.source = "Texto con descripción de la relación entre la fuente de ruido y el receptor, superficies, geometrías y métodos de control existentes";
+        */
+        Measurement.companyName = "Empresa X";
+        Measurement.day = 10;
+        Measurement.month = 8;
+        Measurement.year = 2021;
+        Measurement.workOrder = "OT123456";
+
+        Measurement.measurementPoints = new List<MeasurementPoint>
+        {
+            new MeasurementPoint("Mi Punto 1", "11111.11", "111111.11"),
+            new MeasurementPoint("Mi Punto 2", "22222.22", "222222.22"),
+            new MeasurementPoint("Mi Punto 3", "33333.33", "333333.33"),
+            new MeasurementPoint("Mi Punto 4", "44444.44", "444444.44"),
+        };
+
+        Measurement.usingDayMetConditions = true;
+        Measurement.dayMetConditions = new MetConditions(
+            5.0f, 6.0f,
+            21.5f, 23.1f,
+            50f, 55f,
+            990f, 985f
+            );
+        Measurement.usingNightMetConditions = true;
+        Measurement.nightMetConditions = new MetConditions(
+            8.0f, 7.0f,
+            14.5f, 13.1f,
+            60f, 54f,
+            1000f, 1005f
+            );
+        Measurement.typeOfMeasurement = Measurement.TypeOfMeasurement.NoiseEmission;
+        Measurement.measuringDay = false;
+        Measurement.measuringNight = true;
+        Measurement.soundMeterSerialNumber = "SN1231230";
+        Measurement.calibartorSerialNumber = "SN456456";
+        Measurement.metStationSerialNumber = "SN78978";
+
+        int j = 0;
+        foreach(MeasurementPoint measurementPoint in Measurement.measurementPoints)
+        {
+            ++j;
+            measurementPoint.dayNoiseEmissionMeasurement = new NoiseEmissionMeasurement();
+            measurementPoint.dayNoiseEmissionMeasurement.parameters = NoiseEmissionMeasurement.Parameters.emissionAndResidual;
+            measurementPoint.dayNoiseEmissionMeasurement.descripcion = "Descripción para día";
+            measurementPoint.nightNoiseEmissionMeasurement = new NoiseEmissionMeasurement();
+            measurementPoint.nightNoiseEmissionMeasurement.parameters = NoiseEmissionMeasurement.Parameters.emissionAndResidual;
+            measurementPoint.nightNoiseEmissionMeasurement.descripcion = "Descripción para noche";
+
+            for (int i = 1; i <= 3; i++)
+            { 
+                measurementPoint.dayNoiseEmissionMeasurement.emissionResults.Add(
+                    new NoiseEmissionResult(80.0f + j + (i * 0.1f), 50.0f + j + (i * 0.1f), 101 + j + (i * 10), "12:0" + j.ToString(), "12:1" + j.ToString()));
+                measurementPoint.dayNoiseEmissionMeasurement.residualResults.Add(
+                    new NoiseEmissionResult(75.0f + j + (i * 0.1f), 45.0f + j + (i * 0.1f), 111 + j + (i * 10), "12:2" + j.ToString(), "12:2" + j.ToString()));
+                measurementPoint.nightNoiseEmissionMeasurement.emissionResults.Add(
+                    new NoiseEmissionResult(70.0f + j + (i * 0.1f), 40f + j + (i * 0.1f), 201 + j + (i * 10), "22:0" + j.ToString(), "22:1" + j.ToString()));
+                measurementPoint.nightNoiseEmissionMeasurement.residualResults.Add(
+                    new NoiseEmissionResult(65.0f + j + (i * 0.1f), 35f + j + (i * 0.1f), 211 + j + (i * 10), "22:2" + j.ToString(), "22:3" + j.ToString()));
+            }
+
+
+        }
+
+
+
+
     }
     // Update is called once per frame
     void Update()

@@ -17,7 +17,7 @@ public class GeneralData : MonoBehaviour
 
     void Start()
     {
-
+        /*
         FillDropdownObjects();
         if (!GlobalData.generalDataSaved)
         {
@@ -27,6 +27,7 @@ public class GeneralData : MonoBehaviour
         {
             LoadData();
         }
+        */
         
     }
 

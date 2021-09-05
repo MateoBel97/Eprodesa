@@ -868,6 +868,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69d97189c2b7af04ba03509bafdff450, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chooseFromArray: 0
+  dropdown: {fileID: 0}
+  scenesToLoad: []
 --- !u!114 &1957108568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1108,6 +1111,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69d97189c2b7af04ba03509bafdff450, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chooseFromArray: 0
+  dropdown: {fileID: 0}
+  scenesToLoad: []
 --- !u!1 &2135560267
 GameObject:
   m_ObjectHideFlags: 0

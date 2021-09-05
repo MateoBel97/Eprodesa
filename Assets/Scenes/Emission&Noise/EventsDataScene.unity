@@ -1265,7 +1265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5774140203534850761, guid: bbb8fca5046483d4d8cfa034ba181550, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_StringArgument
-      value: SourceDataScene
+      value: PictureScene
       objectReference: {fileID: 0}
     - target: {fileID: 5774140203534850763, guid: bbb8fca5046483d4d8cfa034ba181550, type: 3}
       propertyPath: m_Name

@@ -108,12 +108,12 @@ public class WeatherData : MonoBehaviour
 
     public void UpdateDayTimeFrame()
     {
-        GlobalData.dayTimeFrame = dayToggle.isOn;
+        GlobalData.dayMetConditions = dayToggle.isOn;
     }
 
     public void UpdateNightTimeFrame()
     {
-        GlobalData.nightTimeFrame = nightToggle.isOn;
+        GlobalData.nightMetConditions = nightToggle.isOn;
     }
 
     public void UpdateInitialWindSpeed()
@@ -182,16 +182,16 @@ public class WeatherData : MonoBehaviour
     void LoadData()
     {
         //Debug.Log("Loading Data :D");
-        dayToggle.isOn = GlobalData.dayTimeFrame;
-        nightToggle.isOn = GlobalData.nightTimeFrame;
+        dayToggle.isOn = GlobalData.dayMetConditions;
+        nightToggle.isOn = GlobalData.nightMetConditions;
 
-        if(GlobalData.dayTimeFrame)
+        if(GlobalData.dayMetConditions)
         {
             //Debug.Log("Loading day info...");
             timeFrameDropDown.value = 0;
             ShowDayInfo();
         }
-        else if(GlobalData.nightTimeFrame)
+        else if(GlobalData.nightMetConditions)
         {
             //Debug.Log("Loading night info...");
             timeFrameDropDown.value = 1;
