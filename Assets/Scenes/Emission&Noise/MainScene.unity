@@ -556,6 +556,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GoBackButton
       objectReference: {fileID: 0}
+    - target: {fileID: 4920455402563400200, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4920455402563400202, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -1233,7 +1237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textTMP: {fileID: 1937084921}
-  defaultValues: 0
+  defaultValues: 1
 --- !u!114 &2135560273
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1264,7 +1268,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6981207053632305229, guid: 0eb5c21c9cbc85b41b8105b2250bf0fe, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 595
+      value: 682
       objectReference: {fileID: 0}
     - target: {fileID: 6981207053632305229, guid: 0eb5c21c9cbc85b41b8105b2250bf0fe, type: 3}
       propertyPath: m_LocalPosition.z

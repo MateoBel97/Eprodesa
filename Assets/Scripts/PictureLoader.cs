@@ -24,8 +24,9 @@ public class PictureLoader : MonoBehaviour
     public void LoadPicture()
     {
         //Texture2D tex = new Texture2D(2, 2);
+        string chosenFilePath;
 #if UNITY_EDITOR_WIN
-        string chosenFilePath = EditorUtility.OpenFilePanel("Load png Textures", "", "");
+        chosenFilePath = EditorUtility.OpenFilePanel("Load png Textures", "", "");
 
 #elif UNITY_STANDALONE_WIN
         chosenFilePath = EditorUtility.OpenFolderPanel("Load png Textures", "", "");

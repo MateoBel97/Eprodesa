@@ -5,7 +5,8 @@ using TMPro;
 
 public class FloatInputField : MonoBehaviour
 {
-    [SerializeField] string variable;
+    public string variable;
+    public int indexToUpdate;
     [SerializeField] string textToShow;
     [SerializeField] bool textUp;
 
@@ -16,7 +17,8 @@ public class FloatInputField : MonoBehaviour
 
     void Start()
     {
-        //Debug.Log("Starting " + transform.name);
+        
+    //Debug.Log("Starting " + transform.name);
         inputField = transform.GetChild(0).GetComponent<TMP_InputField>();
         textUpGameObject = transform.GetChild(1).gameObject;
         textUpGameObject.GetComponent<TextMeshProUGUI>().text = textToShow;
@@ -24,7 +26,7 @@ public class FloatInputField : MonoBehaviour
         textLeftGameObject.GetComponent<TextMeshProUGUI>().text = textToShow;
         SetTextPosition();
         ShowParameter();
-        inputField.onValueChanged.AddListener(delegate { Measurement.UpdateParameter(variable, float.Parse((inputField.text.Equals("") ? "0" : inputField.text))); });
+        inputField.onValueChanged.AddListener(delegate { Measurement.UpdateParameter(variable, float.Parse((inputField.text.Equals("") ? "0" : inputField.text)), index: indexToUpdate); });
     }
 
     void SetTextPosition()
@@ -44,7 +46,7 @@ public class FloatInputField : MonoBehaviour
     public void ShowParameter()
     {
         float type = 0.0f;
-        float value = Measurement   .GetParameter(variable, type);
+        float value = Measurement   .GetParameter(variable, type, index: indexToUpdate);
         Debug.Log("About to get " + variable);
         inputField.text = (value != 0.0f ? value.ToString() : "");
     }

@@ -453,6 +453,14 @@ public static class Measurement
                     measurementPoints[measurementPointBeingUpdated].nightNoiseEmissionMeasurement.residualResults[i].l90 = newValue;
                 }
                 break;
+            case "externalEvents.level":
+                if (index != -1)
+                    externalEvents[index].level = newValue;
+                break;
+            case "externalEvents.length":
+                if (index != -1)
+                    externalEvents[index].length = newValue;
+                break;
             default:
                 Debug.Log("NO VARIABLE UPDATED");
                 break;
@@ -528,6 +536,15 @@ public static class Measurement
                 value = (measurementPoints[measurementPointBeingUpdated].nightNoiseEmissionMeasurement.residualResults.Count == 0 ? 0.0f :
                     measurementPoints[measurementPointBeingUpdated].nightNoiseEmissionMeasurement.residualResults[i].l90);
                 Debug.Log("Returning L90: " + value);
+                break;
+            case "externalEvents.level":
+
+                value = (index == -1 ? 0f : externalEvents[index].level);
+                Debug.Log("Showing Level at " + index.ToString() + ": " + externalEvents[index].level);
+                break;
+            case "externalEvents.length":
+                value = (index == -1 ? 0f : externalEvents[index].length);
+                Debug.Log("Showing Length at " + index.ToString() + ": " + externalEvents[index].length);
                 break;
             default:
                 value = 0;
@@ -624,12 +641,23 @@ public static class Measurement
                     measurementPoints[measurementPointBeingUpdated].nightNoiseEmissionMeasurement.residualResults[i].finalTime = newValue;
                 }
                 break;
+            case "description":
+                description = newValue;
+                break;
+            case "externalEvents.name":
+                if (index != -1)
+                    externalEvents[index].name = newValue;
+                break;
+            case "externalEvents.time":
+                if (index != -1)
+                    externalEvents[index].time = newValue;
+                break;
             default:
                 Debug.Log("NO VARIABLE UPDATED");
                 break;
         }
     }
-    public static string GetParameter(string variable, string type, int index = 0)
+    public static string GetParameter(string variable, string type, int index = 0) 
     {
         string value = null;
         switch (variable)
@@ -716,6 +744,15 @@ public static class Measurement
                     i = measurementPoints[measurementPointBeingUpdated].nightNoiseEmissionMeasurement.residualResultBeingUpdated;
                     value = measurementPoints[measurementPointBeingUpdated].nightNoiseEmissionMeasurement.residualResults[i].finalTime;
                 }
+                break;
+            case "description":
+                value = description;
+                break;
+            case "externalEvents.name":
+                value = (index == -1 ? "" : externalEvents[index].name);
+                break;
+            case "externalEvents.time":
+                value = (index == -1 ? "" : externalEvents[index].time);
                 break;
             default:
                 value = "";

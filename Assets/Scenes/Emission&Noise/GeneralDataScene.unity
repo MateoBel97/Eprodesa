@@ -607,6 +607,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Month
       objectReference: {fileID: 0}
+    - target: {fileID: 696996890888423747, guid: 253c40baac79e214f8646ebc19f98627, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 471.39
+      objectReference: {fileID: 0}
     - target: {fileID: 696996890912849045, guid: 253c40baac79e214f8646ebc19f98627, type: 3}
       propertyPath: m_Options.m_Options.Array.size
       value: 12
@@ -788,6 +792,10 @@ PrefabInstance:
     - target: {fileID: 696996890702584054, guid: 253c40baac79e214f8646ebc19f98627, type: 3}
       propertyPath: m_Name
       value: Year
+      objectReference: {fileID: 0}
+    - target: {fileID: 696996890888423747, guid: 253c40baac79e214f8646ebc19f98627, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 471.39
       objectReference: {fileID: 0}
     - target: {fileID: 696996890912849045, guid: 253c40baac79e214f8646ebc19f98627, type: 3}
       propertyPath: m_Options.m_Options.Array.data[0].m_Text
@@ -1447,6 +1455,10 @@ PrefabInstance:
     - target: {fileID: 696996890702584054, guid: 253c40baac79e214f8646ebc19f98627, type: 3}
       propertyPath: m_Name
       value: Day
+      objectReference: {fileID: 0}
+    - target: {fileID: 696996890888423747, guid: 253c40baac79e214f8646ebc19f98627, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 471.39
       objectReference: {fileID: 0}
     - target: {fileID: 696996890912849045, guid: 253c40baac79e214f8646ebc19f98627, type: 3}
       propertyPath: m_Options.m_Options.Array.data[0].m_Text

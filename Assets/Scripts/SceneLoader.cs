@@ -15,6 +15,28 @@ public class SceneLoader : MonoBehaviour
         if (chooseFromArray)
             SceneManager.LoadScene(scenesToLoad[dropdown.value]);
         else
-            SceneManager.LoadScene(sceneToLoad);
+        {
+            Debug.Log(sceneToLoad.Equals("Results"));
+            if (!sceneToLoad.Equals("Results"))
+            {
+                SceneManager.LoadScene(sceneToLoad);
+            }
+            else
+            {
+                Debug.Log("Loading Results");
+                switch (Measurement.typeOfMeasurement)
+                {
+                    case Measurement.TypeOfMeasurement.NoiseEmission:
+                        SceneManager.LoadScene(scenesToLoad[0]);
+                        break;
+                    case Measurement.TypeOfMeasurement.EnvironmentalNoise:
+                        SceneManager.LoadScene(scenesToLoad[1]);
+                        break;
+                    case Measurement.TypeOfMeasurement.LiteralG:
+                        SceneManager.LoadScene(scenesToLoad[2]);
+                        break;
+                }
+            }
+        }
     }
 }

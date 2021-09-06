@@ -173,7 +173,14 @@ public class MainScript : MonoBehaviour
 
         }
 
+        Measurement.description = "Texto con descripción de las condiciones y procesos de medición";
 
+        Measurement.externalEvents = new List<ExternalEvent>
+        {
+            new ExternalEvent("Avión", 75.6f, "21:45", 5f),
+            new ExternalEvent("Automóvil", 81.4f, "21:55", 1f),
+            new ExternalEvent("Perro", 71.7f, "22:07", 0.5f)
+        };
 
 
     }
