@@ -1237,7 +1237,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   textTMP: {fileID: 1937084921}
-  defaultValues: 1
+  defaultValues: 0
 --- !u!114 &2135560273
 MonoBehaviour:
   m_ObjectHideFlags: 0

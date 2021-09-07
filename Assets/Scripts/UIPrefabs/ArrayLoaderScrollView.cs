@@ -60,6 +60,8 @@ public class ArrayLoaderScrollView : MonoBehaviour
                         int num = ++pointCount;
                         InstantiateNewButton(num);
                     }
+
+                    ShowInfoAtCurrentIndex();
                 }
                 else 
                 {
@@ -84,6 +86,8 @@ public class ArrayLoaderScrollView : MonoBehaviour
                         int num = ++pointCount;
                         InstantiateNewButton(num);
                     }
+
+                    ShowInfoAtCurrentIndex();
                 }
                 else
                 {
@@ -183,6 +187,7 @@ public class ArrayLoaderScrollView : MonoBehaviour
                     GameObject buttonToDelete = GameObject.Find("Copy" + count);
                     GameObject.Destroy(buttonToDelete);
                     Measurement.measurementPoints.RemoveAt(currentIndex);
+                    numPoints--;
 
                     if ((currentIndex + 1) == count)
                     {
@@ -207,7 +212,7 @@ public class ArrayLoaderScrollView : MonoBehaviour
                     GameObject buttonToDelete = GameObject.Find("Copy" + count);
                     GameObject.Destroy(buttonToDelete);
                     Measurement.externalEvents.RemoveAt(currentIndex);
-
+                    numPoints--;
                     if ((currentIndex + 1) == count)
                     {
                         currentIndex--;
@@ -236,6 +241,7 @@ public class ArrayLoaderScrollView : MonoBehaviour
                 count = Measurement.measurementPoints.Count;
                 currentIndex = count;
                 Measurement.measurementPoints.Add(new MeasurementPoint("", "", ""));
+                numPoints++;
                 foreach (GameObject stringIputFieldObject in stringInputFieldObjects)
                 {
                     stringIputFieldObject.GetComponent<StringInputField>().indexToUpdate = currentIndex;
@@ -251,6 +257,7 @@ public class ArrayLoaderScrollView : MonoBehaviour
                 count = Measurement.externalEvents.Count;
                 currentIndex = count;
                 Measurement.externalEvents.Add(new ExternalEvent("", 0f, "", 0f));
+                numPoints++;
                 foreach (GameObject stringIputFieldObject in stringInputFieldObjects)
                 {
                     stringIputFieldObject.GetComponent<StringInputField>().indexToUpdate = currentIndex;
@@ -267,6 +274,14 @@ public class ArrayLoaderScrollView : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+        foreach (GameObject stringIputFieldObject in stringInputFieldObjects)
+        {
+            stringIputFieldObject.SetActive(numPoints > 0);
+        }
+        foreach (GameObject floatInputFieldObject in floatInputFieldObjects)
+        {
+            floatInputFieldObject.SetActive(numPoints > 0);
+        }
     }
 }

@@ -19,8 +19,8 @@ public class NoiseEmissionMeasurement
         this.parameters = Parameters.emissionOnly;
         this.emissionResultBeingUpdated = 0;
         this.residualResultBeingUpdated = 0;
-        //this.emissionResults = new List<NoiseEmissionResult> { new NoiseEmissionResult(0.0f, 0.0f, 0, "", "")};
-        this.emissionResults = new List<NoiseEmissionResult> { };
+        this.emissionResults = new List<NoiseEmissionResult> { new NoiseEmissionResult(0.0f, 0.0f, 0, "", "")};
+        //this.emissionResults = new List<NoiseEmissionResult> { };
         this.residualResults = new List<NoiseEmissionResult> { };
     }
 }

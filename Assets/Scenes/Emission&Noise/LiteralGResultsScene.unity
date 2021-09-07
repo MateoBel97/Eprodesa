@@ -4335,7 +4335,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3747529277011227820, guid: 11c445ab3fb507f41845b8dda6f62299, type: 3}
       propertyPath: m_text
-      value: "RESULTADOS DE MEDICI\xD3N\nPR-33 EMISI\xD3N DE RUIDO"
+      value: "RESULTADOS DE MEDICI\xD3N\nRUIDO AMBIENTAL LITERAL G"
       objectReference: {fileID: 0}
     - target: {fileID: 3747529277011227821, guid: 11c445ab3fb507f41845b8dda6f62299, type: 3}
       propertyPath: m_Pivot.x
@@ -4367,7 +4367,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3747529277011227821, guid: 11c445ab3fb507f41845b8dda6f62299, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 700
+      value: 720
       objectReference: {fileID: 0}
     - target: {fileID: 3747529277011227821, guid: 11c445ab3fb507f41845b8dda6f62299, type: 3}
       propertyPath: m_SizeDelta.y

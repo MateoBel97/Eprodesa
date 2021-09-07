@@ -45,6 +45,7 @@ public class StringInputField : MonoBehaviour
 
     public void ShowParameter()
     {
+        inputField = transform.GetChild(0).GetComponent<TMP_InputField>();
         string type = "";
         string value = Measurement.GetParameter(variable, type, index: indexToUpdate);
         inputField.text = value;

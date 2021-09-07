@@ -17,31 +17,33 @@ public class TxtGenerator : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        text = GlobalData.CreateTxt();
+        text = Measurement.CreateTxt();
     }
-    
+
     public void ExportFile()
     {
 
 #if UNITY_EDITOR_WIN
-        chosenFilePath = EditorUtility.OpenFolderPanel("Load png Textures", "", "");
-        File.WriteAllText(chosenFilePath + "/" + GlobalData.companyName + "-" + GlobalData.workOrder + ".txt", text);
+        chosenFilePath = EditorUtility.OpenFolderPanel("Load png Textures", "C:/Users/Mateo/Desktop", "");
+        File.WriteAllText(chosenFilePath + "/" + Measurement.companyName + "-" + Measurement.workOrder + ".txt", text);
 #elif UNITY_STANDALONE_WIN
-        chosenFilePath = EditorUtility.OpenFolderPanel("Load png Textures", "", "");
-        File.WriteAllText(chosenFilePath + "/" + GlobalData.companyName + "-" + GlobalData.workOrder + ".txt", text);
+        chosenFilePath = EditorUtility.OpenFolderPanel("Load png Textures", "C:/Users/Mateo/Desktop", "texto.txt");
+        File.WriteAllText(chosenFilePath + "/" + Measurement.companyName + "-" + Measurement.workOrder + ".txt", text);
 #elif UNITY_ANDROID
-        chosenFilePath = Application.persistentDataPath + "/" + GlobalData.companyName + "-" + GlobalData.workOrder + ".txt";
-        StartCoroutine(TakeScreenshotAndShare());
+        chosenFilePath = Application.persistentDataPath + "/" + Measurement.companyName + "-" + Measurement.workOrder + ".txt";
+        File.WriteAllText(chosenFilePath, text);
+        //textTMP.text = chosenFilePath;
+        StartCoroutine(ShareFiles());
 #endif
 
     }
 
-    private IEnumerator TakeScreenshotAndShare()
+    private IEnumerator ShareFiles()
     {
         yield return new WaitForEndOfFrame();
 
-        new NativeShare().AddFile(chosenFilePath)//.AddFile("/path/to/another/file.txt")
-            .SetSubject("FORMATO DE CAMPO " + GlobalData.companyName).SetText("Formato de Campo generado mediante la app móvil.\n\n").SetUrl("https://www.eprodesaong.com/")
+        new NativeShare().AddFile(chosenFilePath).AddFile(Measurement.picturePath)
+            .SetSubject("FORMATO DE CAMPO " + Measurement.companyName).SetText("Formato de Campo generado mediante la app móvil.\n\n").SetUrl("https://www.eprodesaong.com/")
             .SetCallback((result, shareTarget) => Debug.Log("Share result: " + result + ", selected app: " + shareTarget))
             .Share();
 

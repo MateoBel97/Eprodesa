@@ -45,6 +45,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Emission&Noise/FilesScene.unity
     guid: 9f0e2f19570328744a236228ff24db3f
   - enabled: 1
+    path: Assets/Scenes/Emission&Noise/LiteralGResultsScene.unity
+    guid: d977f9d01f6a07f469cf1fff998e490b
+  - enabled: 1
     path: Assets/Scenes/Inmission/InmMainScene.unity
     guid: b93dcc49c3e0d14438aec950dddfa863
   - enabled: 1

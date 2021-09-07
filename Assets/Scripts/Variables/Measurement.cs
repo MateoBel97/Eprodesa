@@ -64,6 +64,7 @@ public static class Measurement
 
         measurementPoints = new List<MeasurementPoint> { };
 
+        metConditionsBeingUpdated = 0;
         usingDayMetConditions = false;
         dayMetConditions = new MetConditions();
         usingNightMetConditions = false;
@@ -173,7 +174,6 @@ public static class Measurement
                 break;
             case "timeFrameBeingUpdated":
                 timeFrameBeingUpdated = newValue;
-                Debug.Log("MP " + measurementPointBeingUpdated + ": " + newValue);
                 break;
             case "dayEmission.fileNumber":
                 if(measurementPoints[measurementPointBeingUpdated].dayNoiseEmissionMeasurement.emissionResults.Count != 0)
@@ -205,6 +205,36 @@ public static class Measurement
                     measurementPoints[measurementPointBeingUpdated].nightNoiseEmissionMeasurement.residualResults[i].fileNumber = newValue;
                 }
                 break;
+            case "dayNoise.fileNumberN":
+                measurementPoints[measurementPointBeingUpdated].dayEnvironmentalNoiseMeasurement.environmentalNoiseResult.fileNumberN = newValue;
+                break;
+            case "dayNoise.fileNumberW":
+                measurementPoints[measurementPointBeingUpdated].dayEnvironmentalNoiseMeasurement.environmentalNoiseResult.fileNumberW = newValue;
+                break;
+            case "dayNoise.fileNumberE":
+                measurementPoints[measurementPointBeingUpdated].dayEnvironmentalNoiseMeasurement.environmentalNoiseResult.fileNumberE = newValue;
+                break;
+            case "dayNoise.fileNumberS":
+                measurementPoints[measurementPointBeingUpdated].dayEnvironmentalNoiseMeasurement.environmentalNoiseResult.fileNumberS = newValue;
+                break;
+            case "dayNoise.fileNumberV":
+                measurementPoints[measurementPointBeingUpdated].dayEnvironmentalNoiseMeasurement.environmentalNoiseResult.fileNumberV = newValue;
+                break;
+            case "nightNoise.fileNumberN":
+                measurementPoints[measurementPointBeingUpdated].nightEnvironmentalNoiseMeasurement.environmentalNoiseResult.fileNumberN = newValue;
+                break;
+            case "nightNoise.fileNumberW":
+                measurementPoints[measurementPointBeingUpdated].nightEnvironmentalNoiseMeasurement.environmentalNoiseResult.fileNumberW = newValue;
+                break;
+            case "nightNoise.fileNumberE":
+                measurementPoints[measurementPointBeingUpdated].nightEnvironmentalNoiseMeasurement.environmentalNoiseResult.fileNumberE = newValue;
+                break;
+            case "nightNoise.fileNumberS":
+                measurementPoints[measurementPointBeingUpdated].nightEnvironmentalNoiseMeasurement.environmentalNoiseResult.fileNumberS = newValue;
+                break;
+            case "nightNoise.fileNumberV":
+                measurementPoints[measurementPointBeingUpdated].nightEnvironmentalNoiseMeasurement.environmentalNoiseResult.fileNumberV = newValue;
+                break;
             default:
                 Debug.Log("NO VARIABLE UPDATED");
                 break;
@@ -228,6 +258,7 @@ public static class Measurement
                 value = metConditionsBeingUpdated;
                 break;
             case "typeOfMeasurement":
+                measurementPointBeingUpdated = 0;
                 switch(typeOfMeasurement)
                 {
                     case TypeOfMeasurement.NoiseEmission:
@@ -336,6 +367,36 @@ public static class Measurement
                         value = 3;
                         break;
                 }
+                break;
+            case "dayNoise.fileNumberN":
+                value = measurementPoints[measurementPointBeingUpdated].dayEnvironmentalNoiseMeasurement.environmentalNoiseResult.fileNumberN;
+                break;
+            case "dayNoise.fileNumberW":
+                value = measurementPoints[measurementPointBeingUpdated].dayEnvironmentalNoiseMeasurement.environmentalNoiseResult.fileNumberW;
+                break;
+            case "dayNoise.fileNumberE":
+                value = measurementPoints[measurementPointBeingUpdated].dayEnvironmentalNoiseMeasurement.environmentalNoiseResult.fileNumberE;
+                break;
+            case "dayNoise.fileNumberS":
+                value = measurementPoints[measurementPointBeingUpdated].dayEnvironmentalNoiseMeasurement.environmentalNoiseResult.fileNumberS;
+                break;
+            case "dayNoise.fileNumberV":
+                value = measurementPoints[measurementPointBeingUpdated].dayEnvironmentalNoiseMeasurement.environmentalNoiseResult.fileNumberV;
+                break;
+            case "nightNoise.fileNumberN":
+                value = measurementPoints[measurementPointBeingUpdated].nightEnvironmentalNoiseMeasurement.environmentalNoiseResult.fileNumberN;
+                break;
+            case "nightNoise.fileNumberW":
+                value = measurementPoints[measurementPointBeingUpdated].nightEnvironmentalNoiseMeasurement.environmentalNoiseResult.fileNumberW;
+                break;
+            case "nightNoise.fileNumberE":
+                value = measurementPoints[measurementPointBeingUpdated].nightEnvironmentalNoiseMeasurement.environmentalNoiseResult.fileNumberE;
+                break;
+            case "nightNoise.fileNumberS":
+                value = measurementPoints[measurementPointBeingUpdated].nightEnvironmentalNoiseMeasurement.environmentalNoiseResult.fileNumberS;
+                break;
+            case "nightNoise.fileNumberV":
+                value = measurementPoints[measurementPointBeingUpdated].nightEnvironmentalNoiseMeasurement.environmentalNoiseResult.fileNumberV;
                 break;
             default:
                 value = 0;
@@ -453,6 +514,36 @@ public static class Measurement
                     measurementPoints[measurementPointBeingUpdated].nightNoiseEmissionMeasurement.residualResults[i].l90 = newValue;
                 }
                 break;
+            case "dayNoise.levelN":
+                measurementPoints[measurementPointBeingUpdated].dayEnvironmentalNoiseMeasurement.environmentalNoiseResult.levelN = newValue;
+                break;
+            case "dayNoise.levelW":
+                measurementPoints[measurementPointBeingUpdated].dayEnvironmentalNoiseMeasurement.environmentalNoiseResult.levelW = newValue;
+                break;
+            case "dayNoise.levelE":
+                measurementPoints[measurementPointBeingUpdated].dayEnvironmentalNoiseMeasurement.environmentalNoiseResult.levelE = newValue;
+                break;
+            case "dayNoise.levelS":
+                measurementPoints[measurementPointBeingUpdated].dayEnvironmentalNoiseMeasurement.environmentalNoiseResult.levelS = newValue;
+                break;
+            case "dayNoise.levelV":
+                measurementPoints[measurementPointBeingUpdated].dayEnvironmentalNoiseMeasurement.environmentalNoiseResult.levelV = newValue;
+                break;
+            case "nightNoise.levelN":
+                measurementPoints[measurementPointBeingUpdated].nightEnvironmentalNoiseMeasurement.environmentalNoiseResult.levelN = newValue;
+                break;
+            case "nightNoise.levelW":
+                measurementPoints[measurementPointBeingUpdated].nightEnvironmentalNoiseMeasurement.environmentalNoiseResult.levelW = newValue;
+                break;
+            case "nightNoise.levelE":
+                measurementPoints[measurementPointBeingUpdated].nightEnvironmentalNoiseMeasurement.environmentalNoiseResult.levelE = newValue;
+                break;
+            case "nightNoise.levelS":
+                measurementPoints[measurementPointBeingUpdated].nightEnvironmentalNoiseMeasurement.environmentalNoiseResult.levelS = newValue;
+                break;
+            case "nightNoise.levelV":
+                measurementPoints[measurementPointBeingUpdated].nightEnvironmentalNoiseMeasurement.environmentalNoiseResult.levelV = newValue;
+                break;
             case "externalEvents.level":
                 if (index != -1)
                     externalEvents[index].level = newValue;
@@ -529,16 +620,43 @@ public static class Measurement
                 i = measurementPoints[measurementPointBeingUpdated].nightNoiseEmissionMeasurement.residualResultBeingUpdated;
                 value = (measurementPoints[measurementPointBeingUpdated].nightNoiseEmissionMeasurement.residualResults.Count == 0 ? 0.0f :
                     measurementPoints[measurementPointBeingUpdated].nightNoiseEmissionMeasurement.residualResults[i].laeq);
-                Debug.Log("Returning LAEQ: " + value);
                 break;
             case "nightResidual.L90":
                 i = measurementPoints[measurementPointBeingUpdated].nightNoiseEmissionMeasurement.residualResultBeingUpdated;
                 value = (measurementPoints[measurementPointBeingUpdated].nightNoiseEmissionMeasurement.residualResults.Count == 0 ? 0.0f :
                     measurementPoints[measurementPointBeingUpdated].nightNoiseEmissionMeasurement.residualResults[i].l90);
-                Debug.Log("Returning L90: " + value);
+                break;
+            case "dayNoise.levelN":
+                value = measurementPoints[measurementPointBeingUpdated].dayEnvironmentalNoiseMeasurement.environmentalNoiseResult.levelN;
+                break;
+            case "dayNoise.levelW":
+                value = measurementPoints[measurementPointBeingUpdated].dayEnvironmentalNoiseMeasurement.environmentalNoiseResult.levelW;
+                break;
+            case "dayNoise.levelE":
+                value = measurementPoints[measurementPointBeingUpdated].dayEnvironmentalNoiseMeasurement.environmentalNoiseResult.levelE;
+                break;
+            case "dayNoise.levelS":
+                value = measurementPoints[measurementPointBeingUpdated].dayEnvironmentalNoiseMeasurement.environmentalNoiseResult.levelS;
+                break;
+            case "dayNoise.levelV":
+                value = measurementPoints[measurementPointBeingUpdated].dayEnvironmentalNoiseMeasurement.environmentalNoiseResult.levelV;
+                break;
+            case "nightNoise.levelN":
+                value = measurementPoints[measurementPointBeingUpdated].nightEnvironmentalNoiseMeasurement.environmentalNoiseResult.levelN;
+                break;
+            case "nightNoise.levelW":
+                value = measurementPoints[measurementPointBeingUpdated].nightEnvironmentalNoiseMeasurement.environmentalNoiseResult.levelW;
+                break;
+            case "nightNoise.levelE":
+                value = measurementPoints[measurementPointBeingUpdated].nightEnvironmentalNoiseMeasurement.environmentalNoiseResult.levelE;
+                break;
+            case "nightNoise.levelS":
+                value = measurementPoints[measurementPointBeingUpdated].nightEnvironmentalNoiseMeasurement.environmentalNoiseResult.levelS;
+                break;
+            case "nightNoise.levelV":
+                value = measurementPoints[measurementPointBeingUpdated].nightEnvironmentalNoiseMeasurement.environmentalNoiseResult.levelV;
                 break;
             case "externalEvents.level":
-
                 value = (index == -1 ? 0f : externalEvents[index].level);
                 Debug.Log("Showing Level at " + index.ToString() + ": " + externalEvents[index].level);
                 break;
@@ -641,6 +759,18 @@ public static class Measurement
                     measurementPoints[measurementPointBeingUpdated].nightNoiseEmissionMeasurement.residualResults[i].finalTime = newValue;
                 }
                 break;
+            case "dayNoise.initialTime":
+                measurementPoints[measurementPointBeingUpdated].dayEnvironmentalNoiseMeasurement.environmentalNoiseResult.initialTime = newValue;
+                break;
+            case "dayNoise.finalTime":
+                measurementPoints[measurementPointBeingUpdated].dayEnvironmentalNoiseMeasurement.environmentalNoiseResult.finalTime = newValue;
+                break;
+            case "nightNoise.initialTime":
+                measurementPoints[measurementPointBeingUpdated].nightEnvironmentalNoiseMeasurement.environmentalNoiseResult.initialTime = newValue;
+                break;
+            case "nightNoise.finalTime":
+                measurementPoints[measurementPointBeingUpdated].nightEnvironmentalNoiseMeasurement.environmentalNoiseResult.finalTime = newValue;
+                break;
             case "description":
                 description = newValue;
                 break;
@@ -652,6 +782,10 @@ public static class Measurement
                 if (index != -1)
                     externalEvents[index].time = newValue;
                 break;
+            case "sourceInformation":
+                sourceInformation = newValue;
+                break;
+                
             default:
                 Debug.Log("NO VARIABLE UPDATED");
                 break;
@@ -745,7 +879,20 @@ public static class Measurement
                     value = measurementPoints[measurementPointBeingUpdated].nightNoiseEmissionMeasurement.residualResults[i].finalTime;
                 }
                 break;
+            case "dayNoise.initialTime":
+                value = measurementPoints[measurementPointBeingUpdated].dayEnvironmentalNoiseMeasurement.environmentalNoiseResult.initialTime;
+                break;
+            case "dayNoise.finalTime":
+                value = measurementPoints[measurementPointBeingUpdated].dayEnvironmentalNoiseMeasurement.environmentalNoiseResult.finalTime;
+                break;
+            case "nightNoise.initialTime":
+                value = measurementPoints[measurementPointBeingUpdated].nightEnvironmentalNoiseMeasurement.environmentalNoiseResult.initialTime;
+                break;
+            case "nightNoise.finalTime":
+                value = measurementPoints[measurementPointBeingUpdated].nightEnvironmentalNoiseMeasurement.environmentalNoiseResult.finalTime;
+                break;
             case "description":
+                measurementPointBeingUpdated = 0;
                 value = description;
                 break;
             case "externalEvents.name":
@@ -754,11 +901,348 @@ public static class Measurement
             case "externalEvents.time":
                 value = (index == -1 ? "" : externalEvents[index].time);
                 break;
+            case "sourceInformation":
+                value = sourceInformation;
+                break;
             default:
                 value = "";
                 break;
+
         }
         return value;
+    }
+
+   
+    public static string CreateTxt()
+    {
+        string pageSplit = "+*page*+";
+        string rowSplit = "+*row*+";
+        string columnSplit = "+*column*+";
+
+        //------------------------  GENERAL
+        string myText = "";
+
+        myText += companyName;
+        myText += columnSplit;
+        myText += day.ToString() + columnSplit + month.ToString() + columnSplit + year.ToString();
+        myText += columnSplit;
+        myText += workOrder;
+        myText += pageSplit;
+        //------------------------  GEORREFERENCIACIÓN
+
+        int c = 0;
+        foreach(MeasurementPoint mp in measurementPoints)
+        {
+            c++;
+            myText += mp.name + columnSplit + mp.n + columnSplit + mp.w;
+            if (c < measurementPoints.Count)
+                myText += rowSplit;
+        }
+
+        myText += pageSplit;
+
+        //------------------------  CONDICIONES METEREOLÓGICAS DÍA
+
+
+        if (usingDayMetConditions)
+        {
+            myText += dayMetConditions.initialWindSpeed + columnSplit + dayMetConditions.finalWindSpeed;
+            myText += rowSplit;
+            myText += dayMetConditions.initialTemperature + columnSplit + dayMetConditions.finalTemperature;
+            myText += rowSplit;
+            myText += dayMetConditions.initialHumidity + columnSplit + dayMetConditions.finalHumidity;
+            myText += rowSplit;
+            myText += dayMetConditions.finalAtmPressure + columnSplit + dayMetConditions.finalAtmPressure;
+        }
+        else
+        {
+            myText += "-" + columnSplit + "-";
+            myText += rowSplit;
+            myText += "-" + columnSplit + "-"; 
+            myText += rowSplit;
+            myText += "-" + columnSplit + "-";
+            myText += rowSplit;
+            myText += "-" + columnSplit + "-";
+        }
+
+        myText += pageSplit;
+
+        //------------------------  CONDICIONES METEREOLÓGICAS DÍA
+
+
+        if (usingNightMetConditions)
+        {
+            myText += nightMetConditions.initialWindSpeed + columnSplit + nightMetConditions.finalWindSpeed;
+            myText += rowSplit;
+            myText += nightMetConditions.initialTemperature + columnSplit + nightMetConditions.finalTemperature;
+            myText += rowSplit;
+            myText += nightMetConditions.initialHumidity + columnSplit + nightMetConditions.finalHumidity;
+            myText += rowSplit;
+            myText += nightMetConditions.finalAtmPressure + columnSplit + nightMetConditions.finalAtmPressure;
+        }
+        else
+        {
+            myText += "-" + columnSplit + "-";
+            myText += rowSplit;
+            myText += "-" + columnSplit + "-";
+            myText += rowSplit;
+            myText += "-" + columnSplit + "-";
+            myText += rowSplit;
+            myText += "-" + columnSplit + "-";
+        }
+
+        myText += pageSplit;
+
+        //------------------------  INFORMACIÓN TÉCNICA
+
+        myText += (typeOfMeasurement == TypeOfMeasurement.NoiseEmission ? "X" : "-");
+        myText += rowSplit;
+        myText += (typeOfMeasurement == TypeOfMeasurement.EnvironmentalNoise ? "X" : "-");
+        myText += rowSplit;
+        myText += (typeOfMeasurement == TypeOfMeasurement.LiteralG ? "X" : "-");
+        myText += rowSplit;
+        myText += " ";
+        myText += rowSplit;
+        myText += " ";
+        myText += rowSplit;
+        myText += (measuringDay ? "X" : "-");
+        myText += rowSplit;
+        myText += (measuringNight ? "X" : "-");
+        myText += rowSplit;
+        myText += soundMeterSerialNumber;
+        myText += rowSplit;
+        myText += calibartorSerialNumber;
+        myText += rowSplit;
+        myText += metStationSerialNumber;
+        myText += pageSplit;
+
+        //
+
+        //------------------------  EMISIÓN DE RUIDO
+
+        string pointSplit = "+*point*+";
+        string timeFrameSplit = "+*timeFrame*+";
+        string paramSplit = "+*param*+";
+
+        int point;
+        int result;
+        if (typeOfMeasurement == TypeOfMeasurement.NoiseEmission)
+        {
+            point = 0;
+            foreach (MeasurementPoint mp in measurementPoints)
+            {
+                ++point;
+                if(measuringDay)
+                {
+                    NoiseEmissionMeasurement nem = mp.dayNoiseEmissionMeasurement;
+                    result = 0;
+                    foreach(NoiseEmissionResult emissionResult in nem.emissionResults)
+                    {
+                        ++result;
+                        myText += "Emisión " + result.ToString();
+                        myText += columnSplit;
+                        myText += emissionResult.laeq.ToString();
+                        myText += columnSplit;
+                        myText += emissionResult.l90.ToString();
+                        myText += columnSplit;
+                        myText += emissionResult.fileNumber.ToString();
+                        myText += columnSplit;
+                        myText += emissionResult.initialTime;
+                        myText += columnSplit;
+                        myText += emissionResult.finalTime.ToString();
+                        if(result < nem.emissionResults.Count)
+                        {
+                            myText += rowSplit;
+                        }
+                    }
+                    result = 0;
+                    foreach (NoiseEmissionResult residualResult in nem.residualResults)
+                    {
+                        ++result;
+                        if (result == 1) myText += paramSplit;
+                        myText += "Residual " + result.ToString();
+                        myText += columnSplit;
+                        myText += residualResult.laeq.ToString();
+                        myText += columnSplit;
+                        myText += residualResult.l90.ToString();
+                        myText += columnSplit;
+                        myText += residualResult.fileNumber.ToString();
+                        myText += columnSplit;
+                        myText += residualResult.initialTime;
+                        myText += columnSplit;
+                        myText += residualResult.finalTime.ToString();
+                        if (result < nem.residualResults.Count)
+                        {
+                            myText += rowSplit;
+                        }
+                    }
+                }
+                else
+                {
+                    //myText += "-" + columnSplit + "-" + columnSplit + "-" + columnSplit + "-" + columnSplit + "-" + columnSplit + "-";
+                }
+
+                myText += timeFrameSplit;
+                if (measuringNight)
+                {
+                    NoiseEmissionMeasurement nem = mp.nightNoiseEmissionMeasurement;
+                    result = 0;
+                    foreach (NoiseEmissionResult emissionResult in nem.emissionResults)
+                    {
+                        ++result;
+                        myText += "Emisión " + result.ToString();
+                        myText += columnSplit;
+                        myText += emissionResult.laeq.ToString();
+                        myText += columnSplit;
+                        myText += emissionResult.l90.ToString();
+                        myText += columnSplit;
+                        myText += emissionResult.fileNumber.ToString();
+                        myText += columnSplit;
+                        myText += emissionResult.initialTime;
+                        myText += columnSplit;
+                        myText += emissionResult.finalTime.ToString();
+                        if (result < nem.emissionResults.Count)
+                        {
+                            myText += rowSplit;
+                        }
+                    }
+                    
+                    
+                    result = 0;
+                    foreach (NoiseEmissionResult residualResult in nem.residualResults)
+                    {
+                        ++result;
+                        if (result == 1) myText += paramSplit;
+                        myText += "Residual " + result.ToString();
+                        myText += columnSplit;
+                        myText += residualResult.laeq.ToString();
+                        myText += columnSplit;
+                        myText += residualResult.l90.ToString();
+                        myText += columnSplit;
+                        myText += residualResult.fileNumber.ToString();
+                        myText += columnSplit;
+                        myText += residualResult.initialTime;
+                        myText += columnSplit;
+                        myText += residualResult.finalTime.ToString();
+                        if (result < nem.residualResults.Count)
+                        {
+                            myText += rowSplit;
+                        }
+                    }
+                }
+                else
+                {
+                    //myText += "-" + columnSplit + "-" + columnSplit + "-" + columnSplit + "-" + columnSplit + "-";
+                }
+                if (point < measurementPoints.Count)
+                {
+                    myText += pointSplit;
+                }
+            }
+        }
+
+        myText += pageSplit;
+        //------------------------  RUIDO AMBIENTAL
+        if (typeOfMeasurement == TypeOfMeasurement.EnvironmentalNoise)
+        {
+            point = 0;
+            foreach (MeasurementPoint mp in measurementPoints)
+            {
+                ++point;
+                if (measuringDay)
+                {
+                    EnvironmentalNoiseMeasurement enm = mp.dayEnvironmentalNoiseMeasurement;
+                    EnvironmentalNoiseResult enn = enm.environmentalNoiseResult;
+                    myText += "Ruido Ambiental";
+                    myText += columnSplit;
+                    myText += enn.levelN.ToString();
+                    myText += columnSplit;
+                    myText += enn.fileNumberN.ToString();
+                    myText += columnSplit;
+                    myText += enn.levelW.ToString();
+                    myText += columnSplit;
+                    myText += enn.fileNumberW.ToString();
+                    myText += columnSplit;
+                    myText += enn.levelE.ToString();
+                    myText += columnSplit;
+                    myText += enn.fileNumberE.ToString();
+                    myText += columnSplit;
+                    myText += enn.levelS.ToString();
+                    myText += columnSplit;
+                    myText += enn.fileNumberS.ToString();
+                    myText += columnSplit;
+                    myText += enn.levelV.ToString();
+                    myText += columnSplit;
+                    myText += enn.fileNumberV.ToString();
+                    myText += columnSplit;
+                    myText += enn.initialTime;
+                    myText += columnSplit;
+                    myText += enn.finalTime;
+                }
+                myText += timeFrameSplit;
+                if (measuringNight)
+                {
+                    EnvironmentalNoiseMeasurement enm = mp.nightEnvironmentalNoiseMeasurement;
+                    EnvironmentalNoiseResult enn = enm.environmentalNoiseResult;
+                    myText += "Ruido Ambiental";
+                    myText += columnSplit;
+                    myText += enn.levelN.ToString();
+                    myText += columnSplit;
+                    myText += enn.fileNumberN.ToString();
+                    myText += columnSplit;
+                    myText += enn.levelW.ToString();
+                    myText += columnSplit;
+                    myText += enn.fileNumberW.ToString();
+                    myText += columnSplit;
+                    myText += enn.levelE.ToString();
+                    myText += columnSplit;
+                    myText += enn.fileNumberE.ToString();
+                    myText += columnSplit;
+                    myText += enn.levelS.ToString();
+                    myText += columnSplit;
+                    myText += enn.fileNumberS.ToString();
+                    myText += columnSplit;
+                    myText += enn.levelV.ToString();
+                    myText += columnSplit;
+                    myText += enn.fileNumberV.ToString();
+                    myText += columnSplit;
+                    myText += enn.initialTime;
+                    myText += columnSplit;
+                    myText += enn.finalTime;
+                }
+                if (point < measurementPoints.Count)
+                {
+                    myText += pointSplit;
+                }
+            }
+
+        }
+        myText += pageSplit;
+        //------------------------  LITERAL G
+       
+        myText += pageSplit;
+        //------------------------  DESCRIPCIÓN DE FUENTE
+
+        myText += description;
+        myText += pageSplit;
+        //------------------------  EVENTOS
+
+        c = 0;
+        foreach (ExternalEvent ee in externalEvents)
+        {
+            c++;
+            myText += ee.name + columnSplit + ee.level.ToString() + columnSplit + ee.time + columnSplit + ee.length;
+            if (c < externalEvents.Count)
+                myText += rowSplit;
+        }
+        myText += pageSplit;
+        //------------------------  IMAGEN
+        myText += pageSplit;
+        //------------------------  FUENTE
+        myText += sourceInformation;
+        //------------------------  
+
+        return myText;
     }
 }
 

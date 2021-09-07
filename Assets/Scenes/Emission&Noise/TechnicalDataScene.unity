@@ -355,6 +355,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: IntDropDown
       objectReference: {fileID: 0}
+    - target: {fileID: 696996890888423747, guid: 253c40baac79e214f8646ebc19f98627, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 287.79
+      objectReference: {fileID: 0}
     - target: {fileID: 696996890912849045, guid: 253c40baac79e214f8646ebc19f98627, type: 3}
       propertyPath: m_Options.m_Options.Array.data[0].m_Text
       value: "Emisi\xF3n de Ruido"
@@ -1382,7 +1386,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5774140203534850772, guid: bbb8fca5046483d4d8cfa034ba181550, type: 3}
       propertyPath: scenesToLoad.Array.data[2]
-      value: MainScene
+      value: LiteralGResultsScene
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbb8fca5046483d4d8cfa034ba181550, type: 3}

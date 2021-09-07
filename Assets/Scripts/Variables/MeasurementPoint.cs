@@ -10,8 +10,8 @@ public class MeasurementPoint
     public NoiseEmissionMeasurement dayNoiseEmissionMeasurement { get; set; }
     public NoiseEmissionMeasurement nightNoiseEmissionMeasurement { get; set; }
 
-    public EnvironmentalNoiseResult dayEnvironmentalNoiseMeasurement { get; set; }
-    public EnvironmentalNoiseResult nightEnvironmentalNoiseMeasurement { get; set; }
+    public EnvironmentalNoiseMeasurement dayEnvironmentalNoiseMeasurement { get; set; }
+    public EnvironmentalNoiseMeasurement nightEnvironmentalNoiseMeasurement { get; set; }
 
     public MeasurementPoint(string name, string n, string w)
     {
@@ -21,8 +21,8 @@ public class MeasurementPoint
 
         dayNoiseEmissionMeasurement = new NoiseEmissionMeasurement();
         nightNoiseEmissionMeasurement = new NoiseEmissionMeasurement();
-        dayEnvironmentalNoiseMeasurement = new EnvironmentalNoiseResult();
-        nightEnvironmentalNoiseMeasurement = new EnvironmentalNoiseResult();
+        dayEnvironmentalNoiseMeasurement = new EnvironmentalNoiseMeasurement();
+        nightEnvironmentalNoiseMeasurement = new EnvironmentalNoiseMeasurement();
     }
 
 

@@ -16,9 +16,12 @@ public class FilesReader : MonoBehaviour
     
     FileInfo[] fileInfo;
 
-    string[] pageSplit = new string[] { "*-*-*" };
-    string[] rowSplit = new string[] { "***" };
-    string[] columnSplit = new string[] { "---" };
+    string[] pageSplit = new string[] { "+*page*+" };
+    string[] rowSplit = new string[] { "+*row*+" };
+    string[] columnSplit = new string[] { "+*column*+" };
+    string[] pointSplit = new string[] { "+*point*+" };
+    string[] timeFrameSplit = new string[] { "+*timeFrame*+" };
+    string[] paramSplit = new string[] { "+*param*+" };
 
 
     string chosenFilePath;

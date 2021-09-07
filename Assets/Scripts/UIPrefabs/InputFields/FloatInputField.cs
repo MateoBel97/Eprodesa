@@ -29,6 +29,7 @@ public class FloatInputField : MonoBehaviour
         inputField.onValueChanged.AddListener(delegate { Measurement.UpdateParameter(variable, float.Parse((inputField.text.Equals("") ? "0" : inputField.text)), index: indexToUpdate); });
     }
 
+
     void SetTextPosition()
     {
         if (textUp)
@@ -45,9 +46,13 @@ public class FloatInputField : MonoBehaviour
 
     public void ShowParameter()
     {
+        inputField = transform.GetChild(0).GetComponent<TMP_InputField>();
         float type = 0.0f;
-        float value = Measurement   .GetParameter(variable, type, index: indexToUpdate);
-        Debug.Log("About to get " + variable);
+        float value = Measurement.GetParameter(variable, type, index: indexToUpdate);
+        Debug.Log("if " + inputField);
+        Debug.Log("v " + value);
+        Debug.Log("vts " + value.ToString());
+
         inputField.text = (value != 0.0f ? value.ToString() : "");
     }
 
