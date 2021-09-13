@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class EnvironmentalNoiseMeasurement
 {
@@ -41,6 +42,33 @@ public class EnvironmentalNoiseResult
         this.fileNumberV = fileNumberV;
         this.initialTime = initialTime;
         this.finalTime = finalTime;
+    }
+
+    public EnvironmentalNoiseResult(string[] values)
+    {
+        char oldC = ' ', newC = ' ';
+        if (Application.platform == RuntimePlatform.WindowsEditor)
+        {
+            oldC = '.';
+            newC = ',';
+        }
+        else if (Application.platform == RuntimePlatform.Android)
+        {
+            oldC = ',';
+            newC = '.';
+        }
+        this.levelN = float.Parse(values[1].Replace(oldC, newC));
+        this.fileNumberN = int.Parse(values[2]);
+        this.levelW = float.Parse(values[3].Replace(oldC, newC));
+        this.fileNumberW = int.Parse(values[4]);
+        this.levelE = float.Parse(values[5].Replace(oldC, newC));
+        this.fileNumberE = int.Parse(values[6]);
+        this.levelS = float.Parse(values[7].Replace(oldC, newC));
+        this.fileNumberS = int.Parse(values[8]);
+        this.levelV = float.Parse(values[9].Replace(oldC, newC));
+        this.fileNumberV = int.Parse(values[10]);
+        this.initialTime = values[11];
+        this.finalTime = values[12];
     }
 
     public EnvironmentalNoiseResult ()

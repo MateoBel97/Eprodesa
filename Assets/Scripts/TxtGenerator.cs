@@ -24,10 +24,10 @@ public class TxtGenerator : MonoBehaviour
     {
 
 #if UNITY_EDITOR_WIN
-        chosenFilePath = EditorUtility.OpenFolderPanel("Load png Textures", "C:/Users/Mateo/Desktop", "");
+        chosenFilePath = EditorUtility.OpenFolderPanel("Seleccionar carpeta", "C:/Users/Public/Documents/Formatos de Campo", "");
         File.WriteAllText(chosenFilePath + "/" + Measurement.companyName + "-" + Measurement.workOrder + ".txt", text);
 #elif UNITY_STANDALONE_WIN
-        chosenFilePath = EditorUtility.OpenFolderPanel("Load png Textures", "C:/Users/Mateo/Desktop", "texto.txt");
+        chosenFilePath = EditorUtility.OpenFolderPanel("Seleccionar carpeta", "C:/Users/Public/Documents/Formatos de Campo", "");
         File.WriteAllText(chosenFilePath + "/" + Measurement.companyName + "-" + Measurement.workOrder + ".txt", text);
 #elif UNITY_ANDROID
         chosenFilePath = Application.persistentDataPath + "/" + Measurement.companyName + "-" + Measurement.workOrder + ".txt";
@@ -43,7 +43,7 @@ public class TxtGenerator : MonoBehaviour
         yield return new WaitForEndOfFrame();
 
         new NativeShare().AddFile(chosenFilePath).AddFile(Measurement.picturePath)
-            .SetSubject("FORMATO DE CAMPO " + Measurement.companyName).SetText("Formato de Campo generado mediante la app móvil.\n\n").SetUrl("https://www.eprodesaong.com/")
+            .SetSubject("FORMATO DE CAMPO " + Measurement.companyName + "-" + Measurement.workOrder).SetText("Formato de Campo generado mediante la app móvil.\n\n").SetUrl("https://www.eprodesaong.com/")
             .SetCallback((result, shareTarget) => Debug.Log("Share result: " + result + ", selected app: " + shareTarget))
             .Share();
 

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using UnityEngine;
 
 public class NoiseEmissionMeasurement
 {
@@ -40,6 +41,26 @@ public class NoiseEmissionResult
         this.fileNumber = fileNumber;
         this.initialTime = initialTime;
         this.finalTime = finalTime;
+    }
+
+    public NoiseEmissionResult(string[] results)
+    {
+        char oldC = ' ', newC = ' ';
+        if(Application.platform == RuntimePlatform.WindowsEditor)
+        {
+            oldC = '.';
+            newC = ',';
+        }
+        else if (Application.platform == RuntimePlatform.Android)
+        {
+            oldC = ',';
+            newC = '.';
+        }
+        this.laeq = float.Parse(results[1].Replace(oldC, newC));
+        this.l90 = float.Parse(results[2].Replace(oldC, newC));
+        this.fileNumber = int.Parse(results[3]);
+        this.initialTime = results[4];
+        this.finalTime = results[5];
     }
 
     public NoiseEmissionResult()

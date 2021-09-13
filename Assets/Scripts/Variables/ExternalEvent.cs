@@ -20,4 +20,12 @@ public class ExternalEvent
         this.time = time;
         this.length = length;
     }
+
+    public ExternalEvent(string[] values)
+    {
+        this.name = values[0];
+        this.level = float.Parse(values[1]);
+        this.time = values[2];
+        this.length = float.Parse(values[3]);
+    }
 }

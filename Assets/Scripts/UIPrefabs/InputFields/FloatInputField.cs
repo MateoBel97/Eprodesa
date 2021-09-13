@@ -49,9 +49,6 @@ public class FloatInputField : MonoBehaviour
         inputField = transform.GetChild(0).GetComponent<TMP_InputField>();
         float type = 0.0f;
         float value = Measurement.GetParameter(variable, type, index: indexToUpdate);
-        Debug.Log("if " + inputField);
-        Debug.Log("v " + value);
-        Debug.Log("vts " + value.ToString());
 
         inputField.text = (value != 0.0f ? value.ToString() : "");
     }

@@ -14,7 +14,6 @@ public class BoolToggle : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Starting " + transform.name);
         toggle = transform.GetChild(0).GetComponent<Toggle>();
         GameObject textGameObject = transform.GetChild(0).transform.GetChild(1).gameObject;
         textGameObject.GetComponent<Text>().text = textToShow;

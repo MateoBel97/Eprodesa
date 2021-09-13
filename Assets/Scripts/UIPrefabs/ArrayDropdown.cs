@@ -22,7 +22,6 @@ public class ArrayDropdown : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Starting " + transform.name);
         dropdown = transform.GetChild(0).GetComponent<TMP_Dropdown>();
         GetArrayValues();
         previousButton.GetComponent<Button>().onClick.AddListener(delegate { dropdown.value--; });
@@ -62,7 +61,6 @@ public class ArrayDropdown : MonoBehaviour
         dropdown.ClearOptions();
         int type = 0;
         numValues = Measurement.GetParameter(array, type);
-        Debug.Log("Num Values: " + numValues);
         List<string> options = new List<string> { };
         for(int i = 0; i < numValues; i++)
         {

@@ -20,7 +20,6 @@ public class IntDropdown : MonoBehaviour
 
     void Start()
     {
-        Debug.Log("Starting " + transform.name);
         dropdown = transform.GetChild(0).GetComponent<TMP_Dropdown>();
         if(usingIntValues)
         {
@@ -28,7 +27,6 @@ public class IntDropdown : MonoBehaviour
         }
         ShowParameter();
         dropdown.onValueChanged.AddListener(delegate {
-            Debug.Log("Cambianding a " + dropdown.value);
             Measurement.UpdateParameter(variable, dropdown.value - offset);
             foreach(BoolToggle toggle in togglesToUpdate)
             {

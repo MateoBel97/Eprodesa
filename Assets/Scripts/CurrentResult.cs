@@ -117,7 +117,7 @@ public class CurrentResult : MonoBehaviour
     public void Resize(int dropdownValue)
     {
         SetCurrentSize();
-        Debug.Log("Resizing");
+        //Debug.Log("Resizing");
         switch (array)
         {
             case "dayEmission":
@@ -133,31 +133,31 @@ public class CurrentResult : MonoBehaviour
                         newSize = 5;
                         break;
                 }
-                Debug.Log("Size: " + size + "    New Size: " + newSize);
+                //Debug.Log("Size: " + size + "    New Size: " + newSize);
                 if(newSize > size)
                 {
 
-                    Debug.Log("Need to Add");
+                    //Debug.Log("Need to Add");
                     // size = 1;
                     // newSize = 5;
                     for (int i = size; i < newSize; i++)
                     { 
-                        Debug.Log("Adding...");
+                        //Debug.Log("Adding...");
                         Measurement.measurementPoints[Measurement.measurementPointBeingUpdated].dayNoiseEmissionMeasurement.emissionResults.Add(
                             new NoiseEmissionResult());
                     }
                 }
                 else
                 {
-                    Debug.Log("Need to Remove");
+                    //Debug.Log("Need to Remove");
                     for (int i = size; i > newSize; i--)
                     { 
-                        Debug.Log("Removing...");
+                        //Debug.Log("Removing...");
                         Measurement.measurementPoints[Measurement.measurementPointBeingUpdated].dayNoiseEmissionMeasurement.emissionResults.RemoveAt(i - 1);
                     }
                 }
                 size = newSize;
-                Debug.Log("New Size: " + size);
+                //Debug.Log("New Size: " + size);
                 Measurement.measurementPoints[Measurement.measurementPointBeingUpdated].dayNoiseEmissionMeasurement.emissionResultBeingUpdated = 0;
                 ShowResult();
                 break;
@@ -177,31 +177,31 @@ public class CurrentResult : MonoBehaviour
                         newSize = 5;
                         break;
                 }
-                Debug.Log("Size: " + size + "    New Size: " + newSize);
+                //Debug.Log("Size: " + size + "    New Size: " + newSize);
                 if (newSize > size)
                 {
 
-                    Debug.Log("Need to Add");
+                    //Debug.Log("Need to Add");
                     // size = 1;
                     // newSize = 5;
                     for (int i = size; i < newSize; i++)
                     {
-                        Debug.Log("Adding...");
+                        //Debug.Log("Adding...");
                         Measurement.measurementPoints[Measurement.measurementPointBeingUpdated].dayNoiseEmissionMeasurement.residualResults.Add(
                             new NoiseEmissionResult());
                     }
                 }
                 else
                 {
-                    Debug.Log("Need to Remove");
+                    //Debug.Log("Need to Remove");
                     for (int i = size; i > newSize; i--)
                     {
-                        Debug.Log("Removing...");
+                        //Debug.Log("Removing...");
                         Measurement.measurementPoints[Measurement.measurementPointBeingUpdated].dayNoiseEmissionMeasurement.residualResults.RemoveAt(i - 1);
                     }
                 }
                 size = newSize;
-                Debug.Log("New Size: " + size);
+                //Debug.Log("New Size: " + size);
                 Measurement.measurementPoints[Measurement.measurementPointBeingUpdated].dayNoiseEmissionMeasurement.residualResultBeingUpdated = 0;
                 ShowResult();
                 break;
@@ -218,31 +218,31 @@ public class CurrentResult : MonoBehaviour
                         newSize = 5;
                         break;
                 }
-                Debug.Log("Size: " + size + "    New Size: " + newSize);
+                //Debug.Log("Size: " + size + "    New Size: " + newSize);
                 if (newSize > size)
                 {
 
-                    Debug.Log("Need to Add");
+                    //Debug.Log("Need to Add");
                     // size = 1;
                     // newSize = 5;
                     for (int i = size; i < newSize; i++)
                     {
-                        Debug.Log("Adding...");
+                        //Debug.Log("Adding...");
                         Measurement.measurementPoints[Measurement.measurementPointBeingUpdated].nightNoiseEmissionMeasurement.emissionResults.Add(
                             new NoiseEmissionResult());
                     }
                 }
                 else
                 {
-                    Debug.Log("Need to Remove");
+                    //Debug.Log("Need to Remove");
                     for (int i = size; i > newSize; i--)
                     {
-                        Debug.Log("Removing...");
+                        //Debug.Log("Removing...");
                         Measurement.measurementPoints[Measurement.measurementPointBeingUpdated].nightNoiseEmissionMeasurement.emissionResults.RemoveAt(i - 1);
                     }
                 }
                 size = newSize;
-                Debug.Log("New Size: " + size);
+                //Debug.Log("New Size: " + size);
                 Measurement.measurementPoints[Measurement.measurementPointBeingUpdated].nightNoiseEmissionMeasurement.emissionResultBeingUpdated = 0;
                 ShowResult();
                 break;
@@ -262,32 +262,32 @@ public class CurrentResult : MonoBehaviour
                         newSize = 5;
                         break;
                 }
-                Debug.Log("Size: " + size + "    New Size: " + newSize);
+                //Debug.Log("Size: " + size + "    New Size: " + newSize);
                 if (newSize > size)
                 {
 
-                    Debug.Log("Need to Add");
+                    //Debug.Log("Need to Add");
                     // size = 1;
                     // newSize = 5;
                     for (int i = size; i < newSize; i++)
                     {
-                        Debug.Log("Adding...");
+                        //Debug.Log("Adding...");
                         Measurement.measurementPoints[Measurement.measurementPointBeingUpdated].nightNoiseEmissionMeasurement.residualResults.Add(
                             new NoiseEmissionResult());
                     }
                 }
                 else
                 {
-                    Debug.Log("Need to Remove");
+                    //Debug.Log("Need to Remove");
                     for (int i = size; i > newSize; i--)
                     {
-                        Debug.Log("mpbu: " + Measurement.measurementPointBeingUpdated);
+                        //Debug.Log("mpbu: " + Measurement.measurementPointBeingUpdated);
 
                         Measurement.measurementPoints[Measurement.measurementPointBeingUpdated].nightNoiseEmissionMeasurement.residualResults.RemoveAt(i - 1);
                     }
                 }
                 size = newSize;
-                Debug.Log("New Size: " + size);
+                //Debug.Log("New Size: " + size);
                 Measurement.measurementPoints[Measurement.measurementPointBeingUpdated].nightNoiseEmissionMeasurement.residualResultBeingUpdated = 0;
                 ShowResult();
                 break;

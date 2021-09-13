@@ -24,7 +24,6 @@ public class ArrayLoaderScrollView : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Debug.Log("Starting " + transform.name);
         buttonTemplate = transform.GetChild(0).gameObject;
         buttonTemplate.SetActive(false);
         scrollViewContent = transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).gameObject;
@@ -149,7 +148,6 @@ public class ArrayLoaderScrollView : MonoBehaviour
         switch(array)
         {
             case "measurementPoints":
-                string type = "";
                 foreach(GameObject gameObject in stringInputFieldObjects)
                 {
                     gameObject.GetComponent<StringInputField>().ShowParameter();

@@ -13,7 +13,8 @@ public class FilesReader : MonoBehaviour
     [SerializeField] GameObject scrollviewContent;
     [SerializeField] TextMeshProUGUI infoTMP;
     [SerializeField] TextMeshProUGUI deleteTMP;
-    
+    [SerializeField] GameObject[] gameObjects;
+     
     FileInfo[] fileInfo;
 
     string[] pageSplit = new string[] { "+*page*+" };
@@ -24,18 +25,36 @@ public class FilesReader : MonoBehaviour
     string[] paramSplit = new string[] { "+*param*+" };
 
 
-    string chosenFilePath;
+    string chosenFilePath, picturePath;
     string fileName = "";
     string info;
+
+    char oldCharacter, newCharacter;
 
     bool deleteButtonPressed = false;
 
     void Start()
     {
+        if(Application.platform == RuntimePlatform.WindowsEditor)
+        {
+            oldCharacter = '.';
+            newCharacter = ',';
+        }
+        else if (Application.platform == RuntimePlatform.Android)
+        {
+            oldCharacter = ',';
+            newCharacter = '.';
+        }
+        Debug.Log("Will replace " + oldCharacter + " with " + newCharacter);
         deleteTMP.enabled = false;
         //infoTMP.text = "";
+        foreach(GameObject gameObject in gameObjects)
+        {
+            gameObject.SetActive(false);
+        }
         GetFilesInDirectory();
         ShowFoldersInScrollView();
+
 
     }
 
@@ -44,6 +63,8 @@ public class FilesReader : MonoBehaviour
     {
         
     }
+
+
 
     void GetFilesInDirectory()
     {
@@ -73,8 +94,8 @@ public class FilesReader : MonoBehaviour
                 copy.GetComponent<Button>().onClick.AddListener(
                     () =>
                     {
-                        string chosenFilePath = file.FullName;
-                        GetFileInfo(chosenFilePath);
+                        string path = file.FullName;
+                        GetFileInfo(path);
 
                     }
                     );
@@ -84,6 +105,11 @@ public class FilesReader : MonoBehaviour
 
     void GetFileInfo(string filePath)
     {
+        chosenFilePath = filePath;
+        foreach (GameObject gameObject in gameObjects)
+        {
+            gameObject.SetActive(true);
+        }
         deleteButtonPressed = false;
         deleteTMP.enabled = false;
         info = File.ReadAllText(filePath);
@@ -106,6 +132,7 @@ public class FilesReader : MonoBehaviour
         string month = general.Split(columnSplit, System.StringSplitOptions.None)[2];
         string year = general.Split(columnSplit, System.StringSplitOptions.None)[3];
         string workOrder = general.Split(columnSplit, System.StringSplitOptions.None)[4];
+        picturePath = PageSplit(info)[10];
 
         fileName = company + "-" + workOrder;
 
@@ -115,24 +142,26 @@ public class FilesReader : MonoBehaviour
     public void ExportFile()
     {
 #if UNITY_EDITOR_WIN
-        chosenFilePath = EditorUtility.OpenFolderPanel("Load png Textures", "", "");
+        string newPath = EditorUtility.OpenFolderPanel("Seleccionar carpeta", "C:/Users/Public/Documents/Formatos de Campo", "");
         File.WriteAllText(chosenFilePath + "/" + fileName + ".txt", info);
 #elif UNITY_STANDALONE_WIN
-        chosenFilePath = EditorUtility.OpenFolderPanel("Load png Textures", "", "");
+        string newPath = EditorUtility.OpenFolderPanel("Seleccionar carpeta", "C:/Users/Public/Documents/Formatos de Campo", "");
         File.WriteAllText(chosenFilePath + "/" + fileName + ".txt", info);
 #elif UNITY_ANDROID
-        chosenFilePath = Application.persistentDataPath + "/" + fileName + ".txt";
-        StartCoroutine(TakeScreenshotAndShare());
+        //chosenFilePath = Application.persistentDataPath + "/" + Measurement.companyName + "-" + Measurement.workOrder + ".txt";
+        //File.WriteAllText(chosenFilePath, info);
+        //textTMP.text = chosenFilePath;
+        StartCoroutine(ShareFiles());
 #endif
 
     }
 
-    private IEnumerator TakeScreenshotAndShare()
+    private IEnumerator ShareFiles()
     {
         yield return new WaitForEndOfFrame();
 
-        new NativeShare().AddFile(chosenFilePath)//.AddFile("/path/to/another/file.txt")
-            .SetSubject("FORMATO DE CAMPO " + GlobalData.companyName).SetText("Formato de Campo generado mediante la app móvil.\n\n").SetUrl("https://www.eprodesaong.com/")
+        new NativeShare().AddFile(chosenFilePath).AddFile(picturePath)
+            .SetSubject("FORMATO DE CAMPO " + fileName).SetText("Formato de Campo generado mediante la app móvil.\n\n").SetUrl("https://www.eprodesaong.com/")
             .SetCallback((result, shareTarget) => Debug.Log("Share result: " + result + ", selected app: " + shareTarget))
             .Share();
 
@@ -147,19 +176,20 @@ public class FilesReader : MonoBehaviour
         {
             if (!fileName.Equals(""))
             {
-                Debug.Log("Seguro que desea eliminar?");
+                //Debug.Log("Seguro que desea eliminar?");
 
                 deleteTMP.enabled = true;
                 deleteButtonPressed = true;
             }
             else
             {
-                Debug.Log("No File Selected");
+                //Debug.Log("No File Selected");
             }
 
         }
         else
         {
+            chosenFilePath = "no path";
 #if UNITY_EDITOR_WIN
             chosenFilePath = "C:/Users/Public/Documents/Formatos de Campo";
 #elif UNITY_STANDALONE_WIN
@@ -167,149 +197,168 @@ public class FilesReader : MonoBehaviour
 #elif UNITY_ANDROID
         chosenFilePath =  Application.persistentDataPath;
 #endif
+
             File.Delete(chosenFilePath + "/" + fileName + ".txt");
             SceneManager.LoadScene("FilesScene");
         }
     }
 
+    string[] PageSplit(string textToSplit)
+    {
+        return textToSplit.Split(pageSplit, System.StringSplitOptions.None);
+    }
+    string[] RowSplit(string textToSplit)
+    {
+        return textToSplit.Split(rowSplit, System.StringSplitOptions.None);
+    }
+    string[] ColumnSplit(string textToSplit)
+    {
+        return textToSplit.Split(columnSplit, System.StringSplitOptions.None);
+    }
+    string[] PointSplit(string textToSplit)
+    {
+        return textToSplit.Split(pointSplit, System.StringSplitOptions.None);
+    }
+    string[] TimeFrameSplit(string textToSplit)
+    {
+        return textToSplit.Split(timeFrameSplit, System.StringSplitOptions.None);
+    }
+    string[] ParamSplit(string textToSplit)
+    {
+        return textToSplit.Split(paramSplit, System.StringSplitOptions.None);
+    }
+
     public void LoadInfo()
     {
-        GlobalData.ResetValues();
-
         //
-        string general = info.Split(pageSplit, System.StringSplitOptions.None)[0];
+        string general = PageSplit(info)[0];
         LoadGeneralData(general);
 
         //
-        string measurementPointsData = info.Split(pageSplit, System.StringSplitOptions.None)[1];
+        string measurementPointsData = PageSplit(info)[1];
         LoadMeasurementPointsData(measurementPointsData);
 
         //
-        string dayWeatherInfo = info.Split(pageSplit, System.StringSplitOptions.None)[2];
+        string dayWeatherInfo = PageSplit(info)[2];
         LoadDayWeatherData(dayWeatherInfo);
 
         //
-        string nigthWeatherInfo = info.Split(pageSplit, System.StringSplitOptions.None)[3];
+        string nigthWeatherInfo = PageSplit(info)[3];
         LoadNightWeatherData(nigthWeatherInfo);
 
+        
         //
-        string technicalInfo = info.Split(pageSplit, System.StringSplitOptions.None)[4];
+        string technicalInfo = PageSplit(info)[4];
         LoadTechnicalData(technicalInfo);
 
-        //
-        string serialNumbers = info.Split(pageSplit, System.StringSplitOptions.None)[5];
-        LoadSerialNumbersData(serialNumbers);
-
-        //
-        string emissionInfo = info.Split(pageSplit, System.StringSplitOptions.None)[6];
+        
+        
+        string emissionInfo = PageSplit(info)[5];
         LoadEmissionData(emissionInfo);
         
-        //
-        string noiseInfo = info.Split(pageSplit, System.StringSplitOptions.None)[7];
+        
+        string noiseInfo = PageSplit(info)[6];
         LoadNoiseData(noiseInfo);
         
-        //
-        string description = info.Split(pageSplit, System.StringSplitOptions.None)[8];
+        
+        string description = PageSplit(info)[8];
         LoadDescriptionData(description);
 
-        //
-        string eventsPointsData = info.Split(pageSplit, System.StringSplitOptions.None)[9];
+        
+        string eventsPointsData = PageSplit(info)[9];
         LoadEventsData(eventsPointsData);
 
-        //
+        
         string picturePath = info.Split(pageSplit, System.StringSplitOptions.None)[10];
         LoadPictureData(picturePath);
 
-        //
+        
         string source = info.Split(pageSplit, System.StringSplitOptions.None)[11];
         LoadSourceData(source);
         
         SceneManager.LoadScene("GeneralDataScene");
     }
-
     void LoadGeneralData(string general)
     {
-        GlobalData.generalDataSaved = true;
-        GlobalData.companyName = general.Split(columnSplit, System.StringSplitOptions.None)[0];
-        GlobalData.day = int.Parse(general.Split(columnSplit, System.StringSplitOptions.None)[1]);
-        GlobalData.month = int.Parse(general.Split(columnSplit, System.StringSplitOptions.None)[2]);
-        GlobalData.year = int.Parse(general.Split(columnSplit, System.StringSplitOptions.None)[3]);
-        GlobalData.workOrder = general.Split(columnSplit, System.StringSplitOptions.None)[4];
+        Measurement.companyName = general.Split(columnSplit, System.StringSplitOptions.None)[0];
+        Measurement.day = int.Parse(general.Split(columnSplit, System.StringSplitOptions.None)[1]);
+        Measurement.month = int.Parse(general.Split(columnSplit, System.StringSplitOptions.None)[2]);
+        Measurement.year = int.Parse(general.Split(columnSplit, System.StringSplitOptions.None)[3]);
+        Measurement.workOrder = general.Split(columnSplit, System.StringSplitOptions.None)[4];
+        Measurement.measurementPointBeingUpdated = 0;
+        Measurement.timeFrameBeingUpdated = 0;
+        Measurement.measurementPointBeingUpdated = 0;
     }
-
     void LoadMeasurementPointsData(string measurementPointsData)
     {
-        GlobalData.measurementPointsDataSaved = true;
         string[] measurementPoints = measurementPointsData.Split(rowSplit, System.StringSplitOptions.None);
-        for (int i = 0; i < measurementPoints.Length; i++)
+        foreach(string point in measurementPoints)
         {
-            string[] pointInfo = measurementPoints[i].Split(columnSplit, System.StringSplitOptions.None);
-            if (pointInfo.Length != 1)
+            string[] pointInfo = point.Split(columnSplit, System.StringSplitOptions.None);
+            if(point.Length != 1)
             {
-                GlobalData.pointName.Add(pointInfo[0]);
-                GlobalData.n.Add(pointInfo[1]);
-                GlobalData.w.Add(pointInfo[2]);
+                Measurement.measurementPoints.Add(new MeasurementPoint(
+                    pointInfo[0], pointInfo[1], pointInfo[2]));
             }
             else
             {
-                GlobalData.pointName.Add("");
-                GlobalData.n.Add("");
-                GlobalData.w.Add("");
+                Measurement.measurementPoints.Add(new MeasurementPoint("", "", ""));
             }
         }
     }
-
     void LoadDayWeatherData(string dayWeatherInfo)
     {
-        GlobalData.weatherDataSaved = true;
-        if (!dayWeatherInfo.Equals("NO"))
+        string[] metConditions = dayWeatherInfo.Split(rowSplit, System.StringSplitOptions.None);
+        string[] windSpeed = metConditions[0].Split(columnSplit, System.StringSplitOptions.None);
+        
+        Measurement.usingDayMetConditions = (!windSpeed[0].Equals("-"));
+        if(Measurement.usingDayMetConditions)
         {
-            GlobalData.dayMetConditions = true;
-            string windSpeed = dayWeatherInfo.Split(rowSplit, System.StringSplitOptions.None)[0];
-            GlobalData.initialWindSpeed_D = double.Parse(windSpeed.Split(columnSplit, System.StringSplitOptions.None)[0]);
-            GlobalData.finalWindSpeed_D = double.Parse(windSpeed.Split(columnSplit, System.StringSplitOptions.None)[1]);
-            string temperature = dayWeatherInfo.Split(rowSplit, System.StringSplitOptions.None)[1];
-            GlobalData.initialTemperature_D = double.Parse(temperature.Split(columnSplit, System.StringSplitOptions.None)[0]);
-            GlobalData.finalTemperature_D = double.Parse(temperature.Split(columnSplit, System.StringSplitOptions.None)[1]);
-            string humidity = dayWeatherInfo.Split(rowSplit, System.StringSplitOptions.None)[2];
-            GlobalData.initialHumidity_D = double.Parse(humidity.Split(columnSplit, System.StringSplitOptions.None)[0]);
-            GlobalData.finalHumidity_D = double.Parse(humidity.Split(columnSplit, System.StringSplitOptions.None)[1]);
-            string atmPressure = dayWeatherInfo.Split(rowSplit, System.StringSplitOptions.None)[3];
-            GlobalData.initialAtmPressure_D = double.Parse(atmPressure.Split(columnSplit, System.StringSplitOptions.None)[0]);
-            GlobalData.finalAtmPressure_D = double.Parse(atmPressure.Split(columnSplit, System.StringSplitOptions.None)[1]);
+            Measurement.dayMetConditions.initialWindSpeed = float.Parse(windSpeed[0]);
+            Measurement.dayMetConditions.finalWindSpeed = float.Parse(windSpeed[1]);
+            string[] temperature = metConditions[1].Split(columnSplit, System.StringSplitOptions.None);
+            Measurement.dayMetConditions.initialTemperature = float.Parse(temperature[0]);
+            Measurement.dayMetConditions.finalTemperature = float.Parse(temperature[1]);
+            string[] humidity = metConditions[2].Split(columnSplit, System.StringSplitOptions.None);
+            Measurement.dayMetConditions.initialHumidity = float.Parse(humidity[0]);
+            Measurement.dayMetConditions.finalHumidity = float.Parse(humidity[1]);
+            string[] atmPressure = metConditions[3].Split(columnSplit, System.StringSplitOptions.None);
+            Measurement.dayMetConditions.initialAtmPressure = float.Parse(atmPressure[0]);
+            Measurement.dayMetConditions.finalAtmPressure = float.Parse(atmPressure[1]);
         }
         else
         {
-
+            Measurement.dayMetConditions = new MetConditions();
         }
     }
-
     void LoadNightWeatherData(string nigthWeatherInfo)
     {
-        if (!nigthWeatherInfo.Equals("NO"))
+        string[] metConditions = nigthWeatherInfo.Split(rowSplit, System.StringSplitOptions.None);
+        foreach (string value in metConditions) value.Replace(oldCharacter, newCharacter);
+        string[] windSpeed = metConditions[0].Split(columnSplit, System.StringSplitOptions.None);
+        Measurement.usingNightMetConditions = (!windSpeed[0].Equals("-"));
+        if (Measurement.usingNightMetConditions)
         {
-            GlobalData.nightMetConditions = true;
-            string windSpeed = nigthWeatherInfo.Split(rowSplit, System.StringSplitOptions.None)[0];
-            GlobalData.initialWindSpeed_N = double.Parse(windSpeed.Split(columnSplit, System.StringSplitOptions.None)[0]);
-            GlobalData.finalWindSpeed_N = double.Parse(windSpeed.Split(columnSplit, System.StringSplitOptions.None)[1]);
-            string temperature = nigthWeatherInfo.Split(rowSplit, System.StringSplitOptions.None)[1];
-            GlobalData.initialTemperature_N = double.Parse(temperature.Split(columnSplit, System.StringSplitOptions.None)[0]);
-            GlobalData.finalTemperature_N = double.Parse(temperature.Split(columnSplit, System.StringSplitOptions.None)[1]);
-            string humidity = nigthWeatherInfo.Split(rowSplit, System.StringSplitOptions.None)[2];
-            GlobalData.initialHumidity_N = double.Parse(humidity.Split(columnSplit, System.StringSplitOptions.None)[0]);
-            GlobalData.finalHumidity_N = double.Parse(humidity.Split(columnSplit, System.StringSplitOptions.None)[1]);
-            string atmPressure = nigthWeatherInfo.Split(rowSplit, System.StringSplitOptions.None)[3];
-            GlobalData.initialAtmPressure_N = double.Parse(atmPressure.Split(columnSplit, System.StringSplitOptions.None)[0]);
-            GlobalData.finalAtmPressure_N = double.Parse(atmPressure.Split(columnSplit, System.StringSplitOptions.None)[1]);
+            Measurement.nightMetConditions.initialWindSpeed = float.Parse(windSpeed[0]);
+            Measurement.nightMetConditions.finalWindSpeed = float.Parse(windSpeed[1]);
+            string[] temperature = metConditions[1].Split(columnSplit, System.StringSplitOptions.None);
+            Measurement.nightMetConditions.initialTemperature = float.Parse(temperature[0]);
+            Measurement.nightMetConditions.finalTemperature = float.Parse(temperature[1]);
+            string[] humidity = metConditions[2].Split(columnSplit, System.StringSplitOptions.None);
+            Measurement.nightMetConditions.initialHumidity = float.Parse(humidity[0]);
+            Measurement.nightMetConditions.finalHumidity = float.Parse(humidity[1]);
+            string[] atmPressure = metConditions[3].Split(columnSplit, System.StringSplitOptions.None);
+            Measurement.nightMetConditions.initialAtmPressure = float.Parse(atmPressure[0]);
+            Measurement.nightMetConditions.finalAtmPressure = float.Parse(atmPressure[1]);
         }
         else
         {
-            Debug.Log("NO NIGHT INFO");
+            Measurement.nightMetConditions = new MetConditions();
         }
     }
-
     void LoadTechnicalData(string technicalInfo)
     {
+        /*
         GlobalData.technicalInfoDataSaved = true;
         string typeOfMeasurement = technicalInfo.Split(rowSplit, System.StringSplitOptions.None)[0];
         GlobalData.isNoiseEmissionMeasurement = bool.Parse(typeOfMeasurement.Split(columnSplit, System.StringSplitOptions.None)[0]);
@@ -320,152 +369,125 @@ public class FilesReader : MonoBehaviour
         string timeFrame = technicalInfo.Split(rowSplit, System.StringSplitOptions.None)[2];
         GlobalData.isDayTimeFrame = bool.Parse(timeFrame.Split(columnSplit, System.StringSplitOptions.None)[0]);
         GlobalData.isNightTimeFrame = bool.Parse(timeFrame.Split(columnSplit, System.StringSplitOptions.None)[1]);
-    }
+        */
+        string[] tech = technicalInfo.Split(rowSplit, System.StringSplitOptions.None);
+        if (tech[0].Equals("X"))
+            Measurement.typeOfMeasurement = Measurement.TypeOfMeasurement.NoiseEmission;
+        else if (tech[1].Equals("X"))
+            Measurement.typeOfMeasurement = Measurement.TypeOfMeasurement.EnvironmentalNoise;
+        else
+            Measurement.typeOfMeasurement = Measurement.TypeOfMeasurement.LiteralG;
+        //5 6
+        Measurement.measuringDay = (tech[5].Equals("X"));
+        Measurement.measuringNight = (tech[6].Equals("X"));
+        Measurement.soundMeterSerialNumber = tech[7];
+        Measurement.calibartorSerialNumber = tech[8];
+        Measurement.metStationSerialNumber = tech[9];
 
-    void LoadSerialNumbersData(string serialNumbers)
-    {
-        GlobalData.soundMeterSerialNumber = serialNumbers.Split(columnSplit, System.StringSplitOptions.None)[0];
-        GlobalData.calibratorSerialNumber = serialNumbers.Split(columnSplit, System.StringSplitOptions.None)[1];
-        GlobalData.metStationSerialNumber = serialNumbers.Split(columnSplit, System.StringSplitOptions.None)[2];
     }
-
-    void LoadEmissionData(string emissionInfo)
+    void LoadEmissionData(string noiseEmissionInfo)
     {
-        GlobalData.emissionResultsSaved = true;
-        if (!emissionInfo.Equals("NO"))
+        if (noiseEmissionInfo.Length != 0)
         {
-            foreach (string emissionPoint in emissionInfo.Split(rowSplit, System.StringSplitOptions.None))
+            string[] pointsInfo = PointSplit(noiseEmissionInfo);
+            for (int point = 0; point < pointsInfo.Length; point++)
             {
-                if (emissionPoint.Split(columnSplit, System.StringSplitOptions.None).Length != 1)
+                string[] timeFrameInfo = TimeFrameSplit(pointsInfo[point]);
+                if(timeFrameInfo[0].Length != 0)
                 {
-                    GlobalData.emissionDescription.Add(emissionPoint.Split(columnSplit, System.StringSplitOptions.None)[0]);
-                    GlobalData.emissionLASEQ.Add(float.Parse(emissionPoint.Split(columnSplit, System.StringSplitOptions.None)[1]));
-                    GlobalData.emissionL90.Add(float.Parse(emissionPoint.Split(columnSplit, System.StringSplitOptions.None)[2]));
-                    GlobalData.emissionFileNumber.Add(int.Parse(emissionPoint.Split(columnSplit, System.StringSplitOptions.None)[3]));
-                    GlobalData.emissionInitialTime.Add(emissionPoint.Split(columnSplit, System.StringSplitOptions.None)[4]);
-                    GlobalData.emissionFinalTime.Add(emissionPoint.Split(columnSplit, System.StringSplitOptions.None)[5]);
+                    string[] dayNoiseEmissionInfo = ParamSplit(timeFrameInfo[0]);
+                    string[] emissionInfo = RowSplit(dayNoiseEmissionInfo[0]);
+                    Measurement.measurementPoints[point].dayNoiseEmissionMeasurement.emissionResults.Clear();
+                    foreach (string emissionResult in emissionInfo)
+                    {
+                        string[] values = ColumnSplit(emissionResult);
+                        Measurement.measurementPoints[point].dayNoiseEmissionMeasurement.emissionResults.Add(
+                            new NoiseEmissionResult(values));
+                    }
+                    if (dayNoiseEmissionInfo.Length == 2)
+                    {
+                        string[] residualInfo = RowSplit(dayNoiseEmissionInfo[1]);
+                        foreach (string residualResult in residualInfo)
+                        {
+                            string[] values = ColumnSplit(residualResult);
+                            Measurement.measurementPoints[point].dayNoiseEmissionMeasurement.residualResults.Add(
+                                new NoiseEmissionResult(values));
+                        }
+                    }
                 }
-                else
+                if (timeFrameInfo[1].Length != 0)
                 {
-                    GlobalData.emissionDescription.Add("");
-                    GlobalData.emissionLASEQ.Add(0.0f);
-                    GlobalData.emissionL90.Add(0.0f);
-                    GlobalData.emissionFileNumber.Add(0);
-                    GlobalData.emissionInitialTime.Add("");
-                    GlobalData.emissionFinalTime.Add("");
+                    string[] nightNoiseEmissionInfo = ParamSplit(timeFrameInfo[1]);
+                    string[] emissionInfo = RowSplit(nightNoiseEmissionInfo[0]);
+                    Measurement.measurementPoints[point].nightNoiseEmissionMeasurement.emissionResults.Clear();
+                    foreach (string emissionResult in emissionInfo)
+                    {
+                        string[] values = ColumnSplit(emissionResult);
+                        Measurement.measurementPoints[point].nightNoiseEmissionMeasurement.emissionResults.Add(
+                            new NoiseEmissionResult(values));
+                    }
+                    if (nightNoiseEmissionInfo.Length == 2)
+                    {
+                        string[] residualInfo = RowSplit(nightNoiseEmissionInfo[1]);
+                        foreach (string residualResult in residualInfo)
+                        {
+                            string[] values = ColumnSplit(residualResult);
+                            Measurement.measurementPoints[point].nightNoiseEmissionMeasurement.residualResults.Add(
+                                new NoiseEmissionResult(values));
+                        }
+                    }
                 }
-
-
             }
         }
-        else
-        {
-            GlobalData.emissionDescription.Add("");
-            GlobalData.emissionLASEQ.Add(0.0f);
-            GlobalData.emissionL90.Add(0.0f);
-            GlobalData.emissionFileNumber.Add(0);
-            GlobalData.emissionInitialTime.Add("");
-            GlobalData.emissionFinalTime.Add("");
-        }
     }
-
     void LoadNoiseData(string noiseInfo)
     {
-        GlobalData.noiseResultsSaved = true;
-        if (!noiseInfo.Equals("NO"))
+        
+        if(noiseInfo.Length != 0)
         {
-            foreach (string noisePoint in noiseInfo.Split(rowSplit, System.StringSplitOptions.None))
+            string[] pointsInfo = PointSplit(noiseInfo);
+            foreach (string value in pointsInfo) value.Replace(oldCharacter, newCharacter);
+            for (int point = 0; point < pointsInfo.Length; point++)
             {
-                if (noisePoint.Split(columnSplit, System.StringSplitOptions.None).Length != 1)
+                string[] timeFrameInfo = TimeFrameSplit(pointsInfo[point]);
+                if (timeFrameInfo[0].Length != 0)
                 {
-                    GlobalData.noiseDescription.Add(noisePoint.Split(columnSplit, System.StringSplitOptions.None)[0]);
-                    GlobalData.noiseLevelN.Add(float.Parse(noisePoint.Split(columnSplit, System.StringSplitOptions.None)[1]));
-                    GlobalData.noisefileNumberN.Add(int.Parse(noisePoint.Split(columnSplit, System.StringSplitOptions.None)[2]));
-                    GlobalData.noiseLevelW.Add(float.Parse(noisePoint.Split(columnSplit, System.StringSplitOptions.None)[3]));
-                    GlobalData.noisefileNumberW.Add(int.Parse(noisePoint.Split(columnSplit, System.StringSplitOptions.None)[4]));
-                    GlobalData.noiseLevelE.Add(float.Parse(noisePoint.Split(columnSplit, System.StringSplitOptions.None)[5]));
-                    GlobalData.noisefileNumberE.Add(int.Parse(noisePoint.Split(columnSplit, System.StringSplitOptions.None)[6]));
-                    GlobalData.noiseLevelS.Add(float.Parse(noisePoint.Split(columnSplit, System.StringSplitOptions.None)[7]));
-                    GlobalData.noisefileNumberS.Add(int.Parse(noisePoint.Split(columnSplit, System.StringSplitOptions.None)[8]));
-                    GlobalData.noiseLevelV.Add(float.Parse(noisePoint.Split(columnSplit, System.StringSplitOptions.None)[9]));
-                    GlobalData.noisefileNumberV.Add(int.Parse(noisePoint.Split(columnSplit, System.StringSplitOptions.None)[10]));
-                    GlobalData.noiseInitialTime.Add(noisePoint.Split(columnSplit, System.StringSplitOptions.None)[11]);
-                    GlobalData.noiseFinalTime.Add(noisePoint.Split(columnSplit, System.StringSplitOptions.None)[12]);
+                    string[] values = ColumnSplit(timeFrameInfo[0]);
+                    Measurement.measurementPoints[point].dayEnvironmentalNoiseMeasurement.environmentalNoiseResult =
+                        new EnvironmentalNoiseResult(values);
                 }
-                else
+                if (timeFrameInfo[1].Length != 0)
                 {
-                    GlobalData.noiseDescription.Add("");
-                    GlobalData.noiseLevelN.Add(0.0f);
-                    GlobalData.noisefileNumberN.Add(0);
-                    GlobalData.noiseLevelW.Add(0.0f);
-                    GlobalData.noisefileNumberW.Add(0);
-                    GlobalData.noiseLevelE.Add(0.0f);
-                    GlobalData.noisefileNumberE.Add(0);
-                    GlobalData.noiseLevelS.Add(0.0f);
-                    GlobalData.noisefileNumberS.Add(0);
-                    GlobalData.noiseLevelV.Add(0.0f);
-                    GlobalData.noisefileNumberV.Add(0);
-                    GlobalData.noiseInitialTime.Add("");
-                    GlobalData.noiseFinalTime.Add("");
+                    string[] values = ColumnSplit(timeFrameInfo[1]);
+                    Measurement.measurementPoints[point].nightEnvironmentalNoiseMeasurement.environmentalNoiseResult =
+                        new EnvironmentalNoiseResult(values);
                 }
             }
         }
-        else
-        {
-            GlobalData.noiseDescription.Add("");
-            GlobalData.noiseLevelN.Add(0.0f);
-            GlobalData.noisefileNumberN.Add(0);
-            GlobalData.noiseLevelW.Add(0.0f);
-            GlobalData.noisefileNumberW.Add(0);
-            GlobalData.noiseLevelE.Add(0.0f);
-            GlobalData.noisefileNumberE.Add(0);
-            GlobalData.noiseLevelS.Add(0.0f);
-            GlobalData.noisefileNumberS.Add(0);
-            GlobalData.noiseLevelV.Add(0.0f);
-            GlobalData.noisefileNumberV.Add(0);
-            GlobalData.noiseInitialTime.Add("");
-            GlobalData.noiseFinalTime.Add("");
-        }
     }
-
     void LoadDescriptionData(string description)
     {
-        GlobalData.descriptionDataSaved = true;
-        GlobalData.description = description;
+        Measurement.description = description;
     }
-
-    void LoadEventsData(string eventsPointsData)
+    void LoadEventsData(string eventsData)
     {
-        string[] eventPoints = eventsPointsData.Split(rowSplit, System.StringSplitOptions.None);
-        GlobalData.eventsDataSaved = true;
-        for (int i = 0; i < eventPoints.Length; i++)
+        string[] externalEvents = RowSplit(eventsData);//measurementPointsData.Split(rowSplit, System.StringSplitOptions.None);
+        foreach (string externalEvent in externalEvents)
         {
-            string[] eventInfo = eventPoints[i].Split(columnSplit, System.StringSplitOptions.None);
+            string[] eventInfo = ColumnSplit(externalEvent);//point.Split(columnSplit, System.StringSplitOptions.None);
+             
             if (eventInfo.Length != 1)
             {
-                GlobalData.eventName.Add(eventInfo[0]);
-                GlobalData.eventLevel.Add(float.Parse(eventInfo[1]));
-                GlobalData.eventTime.Add(eventInfo[2]);
-                GlobalData.eventLength.Add(float.Parse(eventInfo[3]));
-            }
-            else
-            {
-                GlobalData.eventName.Add("");
-                GlobalData.eventLevel.Add(0.0f);
-                GlobalData.eventTime.Add("");
-                GlobalData.eventLength.Add(0.0f);
+                Measurement.externalEvents.Add(new ExternalEvent(eventInfo));
             }
         }
     }
-
     void LoadPictureData(string picturePath)
     {
-
+        Measurement.picturePath = picturePath;
     }
-
     void LoadSourceData(string source)
     {
-        GlobalData.sourceDataSaved = true;
-        GlobalData.source = source;
+        Measurement.sourceInformation = source;
     }
 }

@@ -18,7 +18,6 @@ public class StringInputField : MonoBehaviour
 
     void Awake()
     {
-        Debug.Log("Starting " + transform.name);
         inputField = transform.GetChild(0).GetComponent<TMP_InputField>();
         textUpGameObject = transform.GetChild(1).gameObject;
         textUpGameObject.GetComponent<TextMeshProUGUI>().text = textToShow;

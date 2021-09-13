@@ -9,21 +9,27 @@ public class SceneLoader : MonoBehaviour
     [SerializeField] bool chooseFromArray;
     [SerializeField] TMP_Dropdown dropdown;
     [SerializeField] string[] scenesToLoad;
+    [SerializeField] bool createText;
 
     public void LoadScene(string sceneToLoad)
     {
+        if (createText) Measurement.SaveTxt();
         if (chooseFromArray)
+        {
             SceneManager.LoadScene(scenesToLoad[dropdown.value]);
+        }
         else
         {
-            Debug.Log(sceneToLoad.Equals("Results"));
             if (!sceneToLoad.Equals("Results"))
             {
-                SceneManager.LoadScene(sceneToLoad);
+                if (sceneToLoad.Equals("Quit"))
+                    Application.Quit();
+                else
+                    SceneManager.LoadScene(sceneToLoad);
             }
+            
             else
             {
-                Debug.Log("Loading Results");
                 switch (Measurement.typeOfMeasurement)
                 {
                     case Measurement.TypeOfMeasurement.NoiseEmission:

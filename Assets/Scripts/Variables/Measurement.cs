@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 
 public static class Measurement
@@ -57,9 +58,9 @@ public static class Measurement
     public static void ResetValues()
     {
         companyName = null;
-        day = 1;
-        month = 1;
-        year = 2019;
+        day = int.Parse(System.DateTime.Today.ToString().Split('/')[0]); ;
+        month = int.Parse(System.DateTime.Today.ToString().Split('/')[1]);
+        year = int.Parse(System.DateTime.Today.ToString().Split('/')[2].Split(' ')[0]);
         workOrder = null;
 
         measurementPoints = new List<MeasurementPoint> { };
@@ -94,7 +95,6 @@ public static class Measurement
         switch (variable)
         {
             case "usingMetConditions":
-                Debug.Log("Updating Met Conditions");
                 if (metConditionsBeingUpdated == 0)
                 {
                     usingDayMetConditions = newValue;
@@ -143,7 +143,6 @@ public static class Measurement
     // Int Values
     public static void UpdateParameter(string variable, int newValue, int index = 0)
     {
-        Debug.Log("About to update " + variable);
         switch (variable)
         {
             case "day":
@@ -348,7 +347,7 @@ public static class Measurement
                         value = 2;
                         break;
                 }
-                Debug.Log("Returning " + value + " as numResults");
+                //Debug.Log("Returning " + value + " as numResults");
                 break;
             case "nightResidual.Num":
                 value = measurementPoints[measurementPointBeingUpdated].nightNoiseEmissionMeasurement.residualResults.Count;
@@ -658,11 +657,9 @@ public static class Measurement
                 break;
             case "externalEvents.level":
                 value = (index == -1 ? 0f : externalEvents[index].level);
-                Debug.Log("Showing Level at " + index.ToString() + ": " + externalEvents[index].level);
                 break;
             case "externalEvents.length":
                 value = (index == -1 ? 0f : externalEvents[index].length);
-                Debug.Log("Showing Length at " + index.ToString() + ": " + externalEvents[index].length);
                 break;
             default:
                 value = 0;
@@ -1026,7 +1023,7 @@ public static class Measurement
 
         int point;
         int result;
-        if (typeOfMeasurement == TypeOfMeasurement.NoiseEmission)
+        if ((typeOfMeasurement == TypeOfMeasurement.NoiseEmission) || (typeOfMeasurement == TypeOfMeasurement.LiteralG))
         {
             point = 0;
             foreach (MeasurementPoint mp in measurementPoints)
@@ -1039,7 +1036,7 @@ public static class Measurement
                     foreach(NoiseEmissionResult emissionResult in nem.emissionResults)
                     {
                         ++result;
-                        myText += "Emisión " + result.ToString();
+                        myText += mp.name + " - Emisión " + result.ToString();
                         myText += columnSplit;
                         myText += emissionResult.laeq.ToString();
                         myText += columnSplit;
@@ -1049,7 +1046,7 @@ public static class Measurement
                         myText += columnSplit;
                         myText += emissionResult.initialTime;
                         myText += columnSplit;
-                        myText += emissionResult.finalTime.ToString();
+                        myText += emissionResult.finalTime;
                         if(result < nem.emissionResults.Count)
                         {
                             myText += rowSplit;
@@ -1060,7 +1057,7 @@ public static class Measurement
                     {
                         ++result;
                         if (result == 1) myText += paramSplit;
-                        myText += "Residual " + result.ToString();
+                        myText += mp.name + " - Residual " + result.ToString();
                         myText += columnSplit;
                         myText += residualResult.laeq.ToString();
                         myText += columnSplit;
@@ -1070,7 +1067,7 @@ public static class Measurement
                         myText += columnSplit;
                         myText += residualResult.initialTime;
                         myText += columnSplit;
-                        myText += residualResult.finalTime.ToString();
+                        myText += residualResult.finalTime;
                         if (result < nem.residualResults.Count)
                         {
                             myText += rowSplit;
@@ -1090,7 +1087,7 @@ public static class Measurement
                     foreach (NoiseEmissionResult emissionResult in nem.emissionResults)
                     {
                         ++result;
-                        myText += "Emisión " + result.ToString();
+                        myText += mp.name + " - Emisión " + result.ToString();
                         myText += columnSplit;
                         myText += emissionResult.laeq.ToString();
                         myText += columnSplit;
@@ -1100,7 +1097,7 @@ public static class Measurement
                         myText += columnSplit;
                         myText += emissionResult.initialTime;
                         myText += columnSplit;
-                        myText += emissionResult.finalTime.ToString();
+                        myText += emissionResult.finalTime;
                         if (result < nem.emissionResults.Count)
                         {
                             myText += rowSplit;
@@ -1113,7 +1110,7 @@ public static class Measurement
                     {
                         ++result;
                         if (result == 1) myText += paramSplit;
-                        myText += "Residual " + result.ToString();
+                        myText += mp.name + " - Residual " + result.ToString();
                         myText += columnSplit;
                         myText += residualResult.laeq.ToString();
                         myText += columnSplit;
@@ -1123,7 +1120,7 @@ public static class Measurement
                         myText += columnSplit;
                         myText += residualResult.initialTime;
                         myText += columnSplit;
-                        myText += residualResult.finalTime.ToString();
+                        myText += residualResult.finalTime;
                         if (result < nem.residualResults.Count)
                         {
                             myText += rowSplit;
@@ -1153,23 +1150,23 @@ public static class Measurement
                 {
                     EnvironmentalNoiseMeasurement enm = mp.dayEnvironmentalNoiseMeasurement;
                     EnvironmentalNoiseResult enn = enm.environmentalNoiseResult;
-                    myText += "Ruido Ambiental";
+                    myText += mp.name + " - Ruido Ambiental";
                     myText += columnSplit;
                     myText += enn.levelN.ToString();
                     myText += columnSplit;
                     myText += enn.fileNumberN.ToString();
                     myText += columnSplit;
-                    myText += enn.levelW.ToString();
+                    myText += enn.levelS.ToString();
                     myText += columnSplit;
-                    myText += enn.fileNumberW.ToString();
+                    myText += enn.fileNumberS.ToString();
                     myText += columnSplit;
                     myText += enn.levelE.ToString();
                     myText += columnSplit;
                     myText += enn.fileNumberE.ToString();
                     myText += columnSplit;
-                    myText += enn.levelS.ToString();
+                    myText += enn.levelW.ToString();
                     myText += columnSplit;
-                    myText += enn.fileNumberS.ToString();
+                    myText += enn.fileNumberW.ToString();
                     myText += columnSplit;
                     myText += enn.levelV.ToString();
                     myText += columnSplit;
@@ -1237,12 +1234,27 @@ public static class Measurement
         }
         myText += pageSplit;
         //------------------------  IMAGEN
+        myText += picturePath;
         myText += pageSplit;
         //------------------------  FUENTE
         myText += sourceInformation;
         //------------------------  
 
         return myText;
+    }
+    public static void SaveTxt()
+    {
+        string text = CreateTxt();
+        string chosenFilePath = "NO PATH";
+#if UNITY_EDITOR_WIN
+        chosenFilePath = "C:/Users/Public/Documents/Formatos de Campo";
+#elif UNITY_STANDALONE_WIN
+        chosenFilePath = "C:/Users/Public/Documents/Formatos de Campo";
+#elif UNITY_ANDROID
+        chosenFilePath =  Application.persistentDataPath;
+#endif
+        File.WriteAllText(chosenFilePath + "/" + companyName + "-" + workOrder + ".txt", text);
+
     }
 }
 

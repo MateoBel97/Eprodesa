@@ -2324,6 +2324,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ContinueButton
       objectReference: {fileID: 0}
+    - target: {fileID: 5774140203534850772, guid: bbb8fca5046483d4d8cfa034ba181550, type: 3}
+      propertyPath: createText
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bbb8fca5046483d4d8cfa034ba181550, type: 3}
 --- !u!224 &1128115335 stripped
@@ -2347,7 +2351,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4920455402563400199, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
   m_PrefabInstance: {fileID: 2092346094}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 2092346096}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69d97189c2b7af04ba03509bafdff450, type: 3}
@@ -4350,6 +4354,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2135560271}
     m_Modifications:
+    - target: {fileID: 4920455402563400199, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
+      propertyPath: createText
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4920455402563400200, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
       propertyPath: m_Name
       value: GoBackButton
@@ -4489,6 +4497,24 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4920455402563400203, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
   m_PrefabInstance: {fileID: 2092346094}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &2092346096 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4920455402563400200, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
+  m_PrefabInstance: {fileID: 2092346094}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &2092346097
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2092346096}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6adeeb33661fb74692811b62072b223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToLoad: TechnicalDataScene
 --- !u!224 &2092648719 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3651623547479659488, guid: 449eda9905d1d8243ae60dfbb9eeec54, type: 3}

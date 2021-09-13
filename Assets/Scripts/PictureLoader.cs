@@ -38,19 +38,26 @@ public class PictureLoader : MonoBehaviour
         string chosenFilePath;
 #if UNITY_EDITOR_WIN
         chosenFilePath = EditorUtility.OpenFilePanel("Load png Textures", "", "");
+        spriteRenderer.sprite = GetSpritefromImage(chosenFilePath);
+        spriteRenderer.preserveAspect = true;
+        Measurement.picturePath = chosenFilePath;
+        Measurement.picturePixels = File.ReadAllBytes(chosenFilePath);
 
 #elif UNITY_STANDALONE_WIN
         chosenFilePath = EditorUtility.OpenFolderPanel("Load png Textures", "", "");
+        spriteRenderer.sprite = GetSpritefromImage(chosenFilePath);
+        spriteRenderer.preserveAspect = true;
+        Measurement.picturePath = chosenFilePath;
+        Measurement.picturePixels = File.ReadAllBytes(chosenFilePath);
         
 #elif UNITY_ANDROID
-        chosenFilePath = Application.persistentDataPath + "/" + GlobalData.companyName + "-" + GlobalData.workOrder + ".txt";
+        //chosenFilePath = Application.persistentDataPath + "/" + GlobalData.companyName + "-" + GlobalData.workOrder + ".txt";
         
         PickImage(1024);
         
 #endif
         //NativeGallery.Permission NativeGallery.GetImageFromGallery(MediaPickCallback callback, string title = "", string mime = "image/*");
-        //spriteRenderer.sprite = GetSpritefromImage(chosenFilePath);
-        //spriteRenderer.preserveAspect = true;
+
 
 
 

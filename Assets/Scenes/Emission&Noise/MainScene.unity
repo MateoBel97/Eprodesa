@@ -545,6 +545,24 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6981207053632305229, guid: 0eb5c21c9cbc85b41b8105b2250bf0fe, type: 3}
   m_PrefabInstance: {fileID: 6981207053009414531}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1730667020 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4920455402563400200, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
+  m_PrefabInstance: {fileID: 1867067469}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1730667021
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1730667020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6adeeb33661fb74692811b62072b223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToLoad: Quit
 --- !u!1001 &1867067469
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -552,13 +570,29 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2135560271}
     m_Modifications:
+    - target: {fileID: 4920455402225465750, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
+      propertyPath: m_text
+      value: X
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920455402225465750, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
+      propertyPath: m_fontSize
+      value: 70
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920455402225465750, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
+      propertyPath: m_fontStyle
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4920455402225465750, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 70
+      objectReference: {fileID: 0}
     - target: {fileID: 4920455402563400200, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
       propertyPath: m_Name
       value: GoBackButton
       objectReference: {fileID: 0}
     - target: {fileID: 4920455402563400200, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4920455402563400202, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
@@ -582,7 +616,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4920455402563400202, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: ProcedureScene
+      value: Quit
       objectReference: {fileID: 0}
     - target: {fileID: 4920455402563400203, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
       propertyPath: m_Pivot.x
@@ -614,11 +648,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4920455402563400203, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
       propertyPath: m_SizeDelta.x
-      value: 300
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4920455402563400203, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 95
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 4920455402563400203, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
       propertyPath: m_LocalPosition.x
@@ -650,11 +684,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4920455402563400203, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -350
+      value: 463
       objectReference: {fileID: 0}
     - target: {fileID: 4920455402563400203, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -700
+      value: 865
       objectReference: {fileID: 0}
     - target: {fileID: 4920455402563400203, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -680,7 +714,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4920455402563400199, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
   m_PrefabInstance: {fileID: 1867067469}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1730667020}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69d97189c2b7af04ba03509bafdff450, type: 3}
@@ -875,6 +909,7 @@ MonoBehaviour:
   chooseFromArray: 0
   dropdown: {fileID: 0}
   scenesToLoad: []
+  createText: 0
 --- !u!114 &1957108568
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1118,6 +1153,7 @@ MonoBehaviour:
   chooseFromArray: 0
   dropdown: {fileID: 0}
   scenesToLoad: []
+  createText: 0
 --- !u!1 &2135560267
 GameObject:
   m_ObjectHideFlags: 0

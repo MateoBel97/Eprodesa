@@ -421,7 +421,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4920455402563400199, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
   m_PrefabInstance: {fileID: 1950981535}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1950981536}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 69d97189c2b7af04ba03509bafdff450, type: 3}
@@ -717,6 +717,7 @@ MonoBehaviour:
   chooseFromArray: 0
   dropdown: {fileID: 0}
   scenesToLoad: []
+  createText: 0
 --- !u!114 &1447250186
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -978,7 +979,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4920455402563400202, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_StringArgument
-      value: SourceDataScene
+      value: PictureScene
       objectReference: {fileID: 0}
     - target: {fileID: 4920455402563400203, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
       propertyPath: m_Pivot.x
@@ -1066,6 +1067,24 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
+--- !u!1 &1950981536 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4920455402563400200, guid: 6b009dd00d3a4f745871eb56b0fee2e4, type: 3}
+  m_PrefabInstance: {fileID: 1950981535}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1950981537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950981536}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c6adeeb33661fb74692811b62072b223, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneToLoad: PictureScene
 --- !u!1 &2001576685
 GameObject:
   m_ObjectHideFlags: 0
@@ -1215,6 +1234,7 @@ MonoBehaviour:
   chooseFromArray: 0
   dropdown: {fileID: 0}
   scenesToLoad: []
+  createText: 0
 --- !u!1 &2135560267
 GameObject:
   m_ObjectHideFlags: 0
