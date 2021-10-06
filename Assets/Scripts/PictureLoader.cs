@@ -68,7 +68,6 @@ public class PictureLoader : MonoBehaviour
 
         //Converts desired path into byte array
         byte[] pngBytes = System.IO.File.ReadAllBytes(imgPath);
-        Debug.Log(pngBytes[0].ToString() + " " + pngBytes[1].ToString());
 
         //Creates texture and loads byte array data to create image
         Texture2D tex = new Texture2D(2, 2);
@@ -103,7 +102,7 @@ public class PictureLoader : MonoBehaviour
                 Measurement.picturePixels = File.ReadAllBytes(path);
 
                 //textTMP.text = Measurement.picturePixels.Length.ToString();
-                textTMP.text = path;
+                //textTMP.text = path;
                 /*
                 // Assign texture to a temporary quad and destroy it after 5 seconds
                 GameObject quad = GameObject.CreatePrimitive(PrimitiveType.Quad);
